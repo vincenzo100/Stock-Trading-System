@@ -1,0 +1,74 @@
+@charset "utf-8";
+
+/*LAYOUT - start*/
+
+html {
+    max-width: 100vw;
+    max-height: 100vh;
+    margin: 2%;
+}
+
+header {
+    display: flex;
+    align-items: baseline;
+}
+
+.nav {
+    width: 93.74%;
+}
+
+.logo {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.nav {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.nav td {
+    padding-bottom: 20px;
+    padding-left: 60px;
+}
+
+/*LAYOUT - end*/
+
+/*STYLES - start*/
+@font-face {
+    font-family: 'bahnschrift';
+    src: url(bahnschrift.ttf);
+}
+
+html {
+    font-family: 'bahnschrift';
+    background-color: #edddd4;
+}
+
+a:link {
+    text-decoration: none;
+    color: black;
+    font-weight: 2;
+}
+
+a:visited {
+    color: #772e25;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #772e25;
+    font-weight: 600;
+}
+
+header {
+    font-size: 1.2em;
+}
+
+.nav td a:active {
+    color: #772e25;
+    font-weight: 600;
+}
+
+/*STYLES - end*/
+

@@ -1,0 +1,58 @@
+@charset "utf-8";
+
+/*title area - start*/
+
+.welcome {
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+}
+
+.welcome td {
+    font-size: 1.5em;
+}
+
+.table table, .text table{
+    text-align: right;
+    padding-right: 70px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+/*title area - end*/
+
+.want {
+    font-size: 1.8em;
+    font-weight: 300;
+}
+
+.option {
+    font-size: 0.9em;
+    font-weight: 250;
+    line-height: 2;
+}
+
+.view table th, .buy table th, .transfer table th, .orig table th {
+    font-size: 1.8em;
+    font-weight: 300;
+}
+
+.view table td, .buy table td, .transfer table td, .orig table td {
+    font-size: 1em;
+    font-weight: 300;
+    line-height: 3;
+}
+
+.view table a, .buy table a, .transfer table a {
+    font-size: 0.8em;
+    font-weight: 300;
+    line-height: 0.5;
+}
+
+.view table a:hover, .buy table a:hover, .transfer table a:hover {
+    color:#772e25;
+    font-weight: 400;
+}
+
+.table table {
+    border-right: 1px solid black;
+}

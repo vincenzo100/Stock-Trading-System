@@ -1,0 +1,51 @@
+@charset "utf-8";
+
+@font-face {
+    font-family: 'bahnschrift';
+    src: url(bahnschrift.ttf);
+}
+
+header {
+    border-collapse: collapse;
+    border-bottom: 1px solid black;
+}
+
+html {
+    font-family: 'bahnschrift';
+    background-color: #edddd4;
+}
+
+.description {
+    font-size: 1.2em;
+}
+
+.credentials {
+    font-size: 0.9em;
+}
+
+input[type=text] {
+    background-color: #edddd4;
+}
+
+input[type=submit] {
+    font-family: 'bahnschrift';
+    background-color: #772e25;
+    color: #edddd4;
+}
+
+input[type=submit]:hover {
+    color: #edddd4;
+    background-color: #c44536;
+}
+
+.bottom {
+    font-size: 0.7em;
+}
+
+.bottom > p > a {
+    color: #c44536;
+}
+
+.bottom > p > a:hover {
+    color: #772e25;
+}

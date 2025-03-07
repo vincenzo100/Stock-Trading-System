@@ -1,0 +1,77 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>KVB Stocks - Buy/Sell Stocks</title>
+        <link rel="stylesheet" href="user-buy-layout.css">
+        <link rel="stylesheet" href="user-buy-styles.css">
+        <link rel="stylesheet" href="nav-bar.css">
+    </head>
+    <header>
+        <table class="logo">
+            <td><a class="logo" href="user-dash.html">KVB Stocks</a></td>
+        </table>
+        <table class="nav">
+            <td><a href="user-trans.html">Transactions</a></td>
+            <td><a href="user-port.html">Portfolio</a></td>
+            <td><a href="user-login.html">Log Out</a></td>
+        </table>
+        <table class="line">
+            <tr></tr>
+        </table>
+    </header>
+    <!--always copy above text for nav bar-->
+    <body>
+        <table class="title">
+            <tr>
+                <td>Buy/Sell Stocks</td>
+            </tr>
+        </table>
+    <!--always copy above for page title-->
+        <div class="bod">
+            <div class="right">
+                <form>
+                    <label for="ticker">Ticker</label><br>
+                    <input type="text" id="ticker" name="ticker"><br>
+                    <label for="action">Action</label><br>
+                    <select id="action" name="action">
+                        <option value="buy">Buy</option>
+                        <option value="sell">Sell</option>
+                    </select><br>
+                    <label for="shares">Number of Shares</label><br>
+                    <input type="text" id="shares" name="shares">
+                </form>
+            </div>
+            <div class="left">
+                <table class="summary">
+                    <tr>
+                        <td class="sum">
+                            Order Summary
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Shares
+                        </td>
+                        <!--<td>enter function to display amount of shares</td>-->
+                    </tr>
+                    <tr>
+                        <td class="cheat">
+                            Amount
+                        </td>
+                        <!--<td>enter function to display total amount</td>-->
+                    </tr>
+                </table>
+               <div class="extra">
+                    <a href="user-dash.html">
+                        <button>cancel</button>
+                    </a>
+                    <input type="reset" value="clear">
+                    <a href="user-tconf.html">
+                        <button type="submit">submit</button>
+                    </a>
+                </div>
+            </div>     
+        </div>
+    </body>
+</html>

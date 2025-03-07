@@ -1,0 +1,39 @@
+@charset "utf-8";
+
+.title {
+    width: 100%;
+    padding-bottom: 10px;
+    padding-top: 10px;
+
+}
+
+.title th {
+    display: flex;
+}
+
+.bod {
+    display: flex;
+    justify-content: center;
+}
+
+.header {
+    margin-top: 50px;
+    padding-bottom: 20px;
+    width: 80%;
+}
+
+.header .item:first-child, .header .data:first-child {
+    width: 170px;
+    padding-left: 10px;
+}
+
+.item, .data {
+    padding-bottom: 8px;
+    padding-top: 8px;
+}
+
+.header .item:last-child, .header .data:last-child {
+    display: flex;
+    flex-direction: row-reverse;
+    padding-right: 10px;
+}

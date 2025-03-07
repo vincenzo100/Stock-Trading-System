@@ -1,0 +1,72 @@
+@charset "utf-8";
+
+@font-face {
+    font-family: 'bahnschrift';
+    src: url(bahnschrift.ttf);
+}
+
+html {
+    font-family: 'bahnschrift';
+    background-color: #edddd4;
+}
+
+header {
+    border-collapse: collapse;
+    border-bottom: 1px solid black;
+}
+
+.lside {
+    border-right: 1px solid black;
+}
+
+.head1 {
+    font-size: 2em;
+    font-weight: 400;
+}
+
+.head12 {
+    font-size: 0.8em;
+}
+
+.description {
+    font-size: 0.9em;
+    line-height: 25px;
+}
+
+.head2 {
+    font-size: 1.1em;
+}
+
+.names > input[type=text], .epc > input[type=email], .epc > input[type=password] {
+    background-color: #edddd4;
+    font-size: 0.7em;
+}
+
+input::placeholder {
+    color: #772e25;
+}
+
+input[type=submit] {
+    font-family: 'bahnschrift';
+    cursor: pointer;
+    color: #edddd4;
+    border: none;
+    background-color: #772e25;
+}
+
+input[type=submit]:hover {
+    color: #edddd4;
+    background-color: #c44536;
+}
+
+.bottom {
+    font-size: 0.7em;
+}
+
+.bottom > p > a {
+    color: #c44536;
+}
+
+.bottom > p > a:hover {
+    color: #772e25;
+}

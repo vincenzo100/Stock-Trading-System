@@ -1,0 +1,58 @@
+@charset "utf-8";
+
+html {
+    max-width: 100vw;
+    max-height: 100vh;
+    margin: 2%;
+}
+
+header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    width: 100%;
+    padding-bottom: 15px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    flex-basis: auto;
+    align-content: center;
+}
+
+.description {
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+    margin-top: 5%;
+}
+
+.credentials {
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+}
+
+.epass {
+    padding-top: 30px;
+    padding-bottom: 7px;
+}
+
+input[type=text] {
+    width: 400px;
+    padding: 1px;
+}
+
+.submit {
+    display: flex;
+    flex-direction: row-reverse;
+    margin-top: 50px;
+}
+
+.bottom {
+    display: flex;
+    justify-content: center;
+    margin-top: 10%;
+}

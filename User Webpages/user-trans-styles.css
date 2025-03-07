@@ -1,0 +1,36 @@
+@charset "utf-8";
+
+.container a:hover {
+    color: #772e25;
+}
+
+.title {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    line-height: 30px;
+    font-size: 1.5em;
+    font-weight: 400;
+}
+
+.header {
+    font-size: 1.3em;
+    border-collapse: collapse;
+}
+
+.header .item {
+    color: #772e25;
+    font-weight: 500;
+}
+
+.header td {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.item, .data {
+    font-size: 0.8em;
+}
+
+.data {
+    font-weight: 150;
+}
