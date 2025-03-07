@@ -1,0 +1,60 @@
+@charset "utf-8";
+
+.title {
+    width: 100%;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+/*copy above for title page*/
+
+.bod {
+    width: 320px;
+    margin-top: 80px;
+    margin-left: 35%;
+    margin-right: 40%;
+}
+
+.DT tr {
+    display: flex;
+    justify-content: flex-start;   
+    text-align: center;
+}
+
+.DT th {
+    margin-bottom: 5px;
+}
+
+.DT td {
+    margin-bottom: 40px;
+}
+
+.DT button {
+    margin-right: 3px;
+}
+
+.start {
+    padding-right: 10px;
+}
+
+.end {
+    padding-left: 10px;
+}
+
+/*buttons*/
+
+.extra button, .extra input[type=reset], .extra input[type=submit] {
+    border-radius: 50%;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+.extra {
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+    padding-top: 15px;
+}

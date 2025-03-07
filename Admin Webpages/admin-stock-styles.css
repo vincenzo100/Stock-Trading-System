@@ -1,0 +1,68 @@
+@charset "utf-8";
+
+.title {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    line-height: 30px;
+}
+
+.title tr {
+    font-size: 1.5em;
+    font-weight: 400;
+}
+
+/*copy above for title page*/
+
+/*right side of the screen*/
+
+.right {
+    border-right: 1px solid black;
+    font-size: 0.9em;
+}
+
+input[type=text] {
+    width: 400px;
+}
+
+/*left side of the screen*/
+
+.summary th {
+    font-size: 1.2em;
+    font-weight: 400;
+}
+
+.summary td {
+    font-weight: 300;
+    line-height: 30px;
+}
+
+.summary .cheat {
+    border-top: 1px solid black;
+    width: 100%;
+}
+
+.summary .sum {
+    font-size: 1.2em;
+    font-weight: 350;
+    color: #772e25;
+}
+
+/*buttons*/
+
+input[type=text], input[type=action], button, input[type=reset], input[type=submit], select {
+    background-color: #edddd4;
+}
+
+button, input[type=reset], input[type=submit] {
+    cursor: pointer;
+    color: #edddd4;
+    border: none;
+    background-color: #772e25;
+}
+
+button:hover, input[type=reset]:hover, input[type=submit]:hover {
+    cursor: pointer;
+    color: #772e25;
+    border: 1px solid #772e25;
+    background-color: #edddd4;
+}

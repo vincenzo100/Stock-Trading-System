@@ -1,0 +1,29 @@
+@charset "utf-8";
+
+html {
+    max-width: 100vw;
+    max-height: 100vh;
+    margin: 2%;
+}
+
+.logo {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    padding-bottom: 15px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.head1 {
+    margin-top: 12%;
+}
+
+.description {
+    margin: 0;
+}

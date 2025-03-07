@@ -1,0 +1,64 @@
+@charset "utf-8";
+
+.title {
+    width: 100%;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+/*copy above for title page*/
+
+/*both sides of the screen*/
+
+.bod {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+.right, .left {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/*right side of the screen*/
+
+.right {
+    padding-right: 125px;
+}
+
+/*left side of the screen*/
+
+.left {
+    padding-left: 125px;
+}
+
+.summary {
+    padding-bottom: 40px;
+    width: 400px;
+}
+
+.summary .sum {
+    padding-bottom: 40px;
+}
+
+input[type=text], #action {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+button, input[type=reset], input[type=submit] {
+    border-radius: 50%;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.extra {
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+}

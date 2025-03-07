@@ -1,0 +1,46 @@
+@charset "utf-8";
+
+/*title area - start*/
+
+.welcome {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 100%;
+}
+
+.welcome td {
+    text-align: right;
+}
+
+/*title area - end*/
+
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 60px;
+}
+
+.table, .text {
+    width: 260px;
+}
+
+.text th, .text td {
+    display: flex;
+    justify-content: flex-start;
+    margin: 5px;
+}
+
+.create, .hours, .sched {
+    z-index: 0;
+    position: absolute;
+}
+
+.hours, .create {
+    visibility: hidden;
+}
+
+.sched tr {
+    display: flex;
+    justify-content: flex-start;
+}

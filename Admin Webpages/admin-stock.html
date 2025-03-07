@@ -1,0 +1,75 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>KVB Stocks - Stock Creation</title>
+        <link rel="stylesheet" href="admin-stock-layout.css">
+        <link rel="stylesheet" href="admin-stock-styles.css">
+        <link rel="stylesheet" href="/User Webpages/nav-bar.css">
+    </head>
+    <header>
+        <table class="logo">
+            <td><a class="logo" href="admin-dash.html">KVB Admin</a></td>
+        </table>
+        <table class="nav">
+            <td><a href="admin-login.html">Log Out</a></td>
+        </table>
+    </header>
+    <!--always copy above text for nav bar-->
+    <body>
+        <table class="title">
+            <tr>
+                <td>Create a Stock</td>
+            </tr>
+        </table>
+    <!--always copy above for page title-->
+        <div class="bod">
+            <div class="right">
+                <form>
+                    <label for="company">Company Name*</label><br>
+                    <input type="text" id="company" name="company"><br>
+                    <label for="ticket">Stock Ticker*</label><br>
+                    <input type="text" id="ticker" name="ticker"><br>
+                    <label for="initial">Initial Price*</label><br>
+                    <input type="text" id="initial" name="initial">
+                </form>
+            </div>
+            <div class="left">
+                <table class="summary">
+                    <tr>
+                        <td class="sum">
+                            Order Summary
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Company Name
+                        </td>
+                        <!--<td>enter function to display amount of shares</td>-->
+                    </tr>
+                    <tr>
+                        <td class="cheat">
+                            Stock Ticker
+                        </td>
+                        <!--<td>enter function to display total amount</td>-->
+                    </tr>
+                    <tr>
+                        <td class="cheat">
+                            Total Amount
+                        </td>
+                        <!--<td>enter function to display total amount</td>-->
+                    </tr>
+                </table>
+               <div class="extra">
+                    <a href="admin-dash.html">
+                        <button>cancel</button>
+                    </a>
+                    <input type="reset" value="clear">
+                    <a href="admin-conf.html">
+                        <button type="submit">submit</button>
+                    </a>
+                </div>
+            </div>     
+        </div>
+    </body>
+</html>

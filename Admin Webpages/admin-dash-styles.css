@@ -1,0 +1,58 @@
+@charset "utf-8";
+
+/*title area - start*/
+
+.welcome {
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+}
+
+.welcome td {
+    font-size: 1.5em;
+}
+
+.table table, .text table{
+    text-align: right;
+    padding-right: 70px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+/*title area - end*/
+
+.want {
+    font-size: 1.8em;
+    font-weight: 300;
+}
+
+.option {
+    font-size: 0.9em;
+    font-weight: 250;
+    line-height: 2;
+}
+
+.create table th, .hours table th, .sched table th {
+    font-size: 1.8em;
+    font-weight: 300;
+}
+
+.create table td, .hours table td, .sched table td {
+    font-size: 1em;
+    font-weight: 300;
+    line-height: 3;
+}
+
+.create table a, .hours table a, .sched table a {
+    font-size: 0.8em;
+    font-weight: 300;
+    line-height: 0.5;
+}
+
+.create table a:hover, .hours table a:hover, .sched table a:hover {
+    color:#772e25;
+    font-weight: 400;
+}
+
+.table table {
+    border-right: 1px solid black;
+}

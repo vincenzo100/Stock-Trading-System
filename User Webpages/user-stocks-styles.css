@@ -1,0 +1,40 @@
+@charset "utf-8";
+
+.title {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    line-height: 30px;
+}
+
+.title tr:nth-child(1) {
+    font-size: 1.5em;
+    font-weight: 400;
+    color: #772e25;
+}
+
+.title tr:nth-child(2) {
+    font-size: 0.8em;
+}
+
+/*copy above for title page*/
+
+.header {
+    border-collapse: collapse;
+}
+
+.header td {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.item {
+    color: #772e25;
+}
+
+.item, .data {
+    font-size: 0.8em;
+}
+
+.data {
+    font-weight: 150;
+}

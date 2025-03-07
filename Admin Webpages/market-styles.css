@@ -1,0 +1,51 @@
+@charset "utf-8";
+
+.title {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    line-height: 30px;
+}
+
+.title tr {
+    font-size: 1.5em;
+    font-weight: 400;
+}
+
+/*copy above for title page*/
+
+.DT button {
+    border: 1px solid #772e25;
+    background-color: #e7e7e7;
+    color: gray;
+    text-align: center;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+
+.DT button:hover {
+    border: 1px solid #772e25;
+    background-color: #772e25;
+    color: #edddd4;
+    font-weight: 700;
+}
+
+/*buttons*/
+
+.extra button, .extra input[type=reset], .extra input[type=submit] {
+    background-color: #edddd4;
+}
+
+.extra button, .extra input[type=reset], .extra input[type=submit] {
+    cursor: pointer;
+    color: #edddd4;
+    border: none;
+    background-color: #772e25;
+}
+
+.extra button:hover, .extra input[type=reset]:hover, .extra input[type=submit]:hover {
+    cursor: pointer;
+    color: #772e25;
+    border: 1px solid #772e25;
+    background-color: #edddd4;
+}
