@@ -44,10 +44,13 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# **Fix for Missing ROOT_URLCONF**
+ROOT_URLCONF = "stock_trading.urls"
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],  
+        "DIRS": [],  # Can add custom template directories here if needed
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -91,3 +94,4 @@ DATABASES = {
 STATIC_URL = "/static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
