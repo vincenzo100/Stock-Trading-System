@@ -1,7 +1,7 @@
+from decimal import Decimal
 import random
 from django.db import models
 from django.contrib.auth.models import User
-from decimal import Decimal  # Import Decimal to handle price calculations
 
 class Stock(models.Model):
     ticker = models.CharField(max_length=10, unique=True)
@@ -12,9 +12,9 @@ class Stock(models.Model):
 
     def update_price(self):
         """ Randomly increase or decrease the stock price within a small range. """
-        price_change = Decimal(str(random.uniform(-2.0, 2.0)))  
-        new_price = max(Decimal("1.0"), self.price + price_change)  
-        self.price = new_price.quantize(Decimal("0.01"))  
+        price_change = Decimal(str(random.uniform(-2.0, 2.0)))  # Convert float to Decimal
+        new_price = max(Decimal('1.00'), self.price + price_change)  # Prevents negative price
+        self.price = new_price.quantize(Decimal('0.01'))  # Rounds to 2 decimal places
         self.save()
 
     def __str__(self):
@@ -51,4 +51,3 @@ class Transaction(models.Model):
 
     def __str__(self):
         return f"{self.transaction_type} - {self.amount} by {self.user.username}"
-
