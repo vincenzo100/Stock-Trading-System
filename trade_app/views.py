@@ -19,11 +19,10 @@ def get_stock(request, ticker):
 @api_view(['GET'])
 def list_stocks(request):
     stocks = Stock.objects.all()
-    print(f"DEBUG: Found {stocks.count()} stocks")  # Debugging log
     serializer = StockSerializer(stocks, many=True)
     return Response(serializer.data)
 
-# User Registration 
+# User Registration (Now Returns Auth Token)
 @api_view(['POST'])
 def register_user(request):
     username = request.data.get('username')
@@ -52,7 +51,7 @@ def login_user(request):
         return JsonResponse({'message': 'Login successful'})
     return JsonResponse({'error': 'Invalid credentials'}, status=400)
 
-
+# Buy Stocks 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def buy_stock(request):
@@ -78,6 +77,7 @@ def buy_stock(request):
     else:
         return JsonResponse({'error': 'Insufficient funds'}, status=400)
 
+# Sell Stocks
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def sell_stock(request):
@@ -103,6 +103,24 @@ def sell_stock(request):
         return JsonResponse({'message': 'Stock sold successfully'})
     else:
         return JsonResponse({'error': 'Not enough shares'}, status=400)
+
+# Deposit Cash (Previously Missing Function)
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def deposit_cash(request):
+    user = request.user
+    amount = request.data.get("amount")
+
+    if not amount or float(amount) <= 0:
+        return JsonResponse({'error': 'Deposit amount must be greater than zero'}, status=400)
+
+    portfolio = Portfolio.objects.get(user=user)
+    portfolio.cash_balance += float(amount)
+    portfolio.save()
+
+    Transaction.objects.create(user=user, transaction_type='DEPOSIT', amount=amount)
+
+    return JsonResponse({'message': f'Deposited ${amount} successfully'})
 
 # Update Stock Price (Fixes API Key Naming)
 @api_view(['PATCH'])
