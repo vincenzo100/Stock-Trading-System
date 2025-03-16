@@ -8,12 +8,6 @@ from django.shortcuts import get_object_or_404
 from .models import Stock, Portfolio, PortfolioStock, Transaction
 from .serializers import StockSerializer, PortfolioSerializer, PortfolioStockSerializer, TransactionSerializer, UserSerializer
 
-# Debugging to detect circular imports
-try:
-    from .views import login_user
-except ImportError as e:
-    raise ImportError(f"Error importing login_user: {e}")
-
 # User Login 
 @api_view(['POST'])
 def login_user(request):
