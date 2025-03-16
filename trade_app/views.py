@@ -8,22 +8,24 @@ from django.shortcuts import get_object_or_404
 from .models import Stock, Portfolio, PortfolioStock, Transaction
 from .serializers import StockSerializer, PortfolioSerializer, PortfolioStockSerializer, TransactionSerializer, UserSerializer
 
-# User Login 
+# User Registration 
 @api_view(['POST'])
-def login_user(request):
+def register_user(request):
     """
-    Allows a user to log in.
-    Authenticates username and password.
-    Returns a success message if authentication is successful.
+    Allows a new user to register an account.
+    Ensures username, email, and password are provided.
+    Returns an error if the username is already taken.
     """
     username = request.data.get('username')
     password = request.data.get('password')
+    email = request.data.get('email')
 
-    if not username or not password:
-        return JsonResponse({'error': 'Username and password are required'}, status=400)
+    if not username or not password or not email:
+        return JsonResponse({'error': 'All fields are required'}, status=400)
 
-    user = authenticate(username=username, password=password)
+    if User.objects.filter(username=username).exists():
+        return JsonResponse({'error': 'Username already taken'}, status=400)
 
-    if user:
-        return JsonResponse({'message': 'Login successful'})
-    return JsonResponse({'error': 'Invalid credentials'}, status=400)
+    user = User.objects.create_user(username=username, password=password, email=email)
+    Portfolio.objects.create(user=user)  
+    return JsonResponse({'message': 'User created successfully'})
