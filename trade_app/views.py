@@ -8,27 +8,24 @@ from django.shortcuts import get_object_or_404
 from .models import Stock, Portfolio, PortfolioStock, Transaction
 from .serializers import StockSerializer, PortfolioSerializer, PortfolioStockSerializer, TransactionSerializer, UserSerializer
 
-# Add New Stock (Admin Only)
+# User Registration 
 @api_view(['POST'])
-@permission_classes([IsAuthenticated, IsAdminUser])
-def add_stock(request):
+def register_user(request):
     """
-    Allows admin to add a new stock.
-    Ensures ticker, company_name, price, and volume are provided.
-    Returns an error if stock already exists.
+    Allows a new user to register an account.
+    Ensures username, email, and password are provided.
+    Returns an error if the username is already taken.
     """
-    ticker = request.data.get('ticker')
-    company_name = request.data.get('company_name')
-    price = request.data.get('price')
-    volume = request.data.get('volume')
+    username = request.data.get('username')
+    password = request.data.get('password')
+    email = request.data.get('email')
 
-    if not ticker or not company_name or not price or not volume:
+    if not username or not password or not email:
         return JsonResponse({'error': 'All fields are required'}, status=400)
 
-    if Stock.objects.filter(ticker=ticker).exists():
-        return JsonResponse({'error': 'Stock ticker already exists'}, status=400)
+    if User.objects.filter(username=username).exists():
+        return JsonResponse({'error': 'Username already taken'}, status=400)
 
-    stock = Stock.objects.create(
-        ticker=ticker, company_name=company_name, price=float(price), volume=int(volume)
-    )
-    return JsonResponse({'message': f'Stock {stock.ticker} added successfully'})
+    user = User.objects.create_user(username=username, password=password, email=email)
+    Portfolio.objects.create(user=user)  # Automatically create a portfolio for new users
+    return JsonResponse({'message': 'User created successfully'})
