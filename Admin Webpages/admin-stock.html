@@ -1,75 +1,37 @@
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>KVB Stocks - Stock Creation</title>
-        <link rel="stylesheet" href="admin-stock-layout.css">
-        <link rel="stylesheet" href="admin-stock-styles.css">
-        <link rel="stylesheet" href="/User Webpages/nav-bar.css">
-    </head>
-    <header>
-        <table class="logo">
-            <td><a class="logo" href="admin-dash.html">KVB Admin</a></td>
-        </table>
-        <table class="nav">
-            <td><a href="admin-login.html">Log Out</a></td>
-        </table>
-    </header>
-    <!--always copy above text for nav bar-->
-    <body>
-        <table class="title">
-            <tr>
-                <td>Create a Stock</td>
-            </tr>
-        </table>
-    <!--always copy above for page title-->
-        <div class="bod">
-            <div class="right">
-                <form>
-                    <label for="company">Company Name*</label><br>
-                    <input type="text" id="company" name="company"><br>
-                    <label for="ticket">Stock Ticker*</label><br>
-                    <input type="text" id="ticker" name="ticker"><br>
-                    <label for="initial">Initial Price*</label><br>
-                    <input type="text" id="initial" name="initial">
-                </form>
-            </div>
-            <div class="left">
-                <table class="summary">
-                    <tr>
-                        <td class="sum">
-                            Order Summary
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Company Name
-                        </td>
-                        <!--<td>enter function to display amount of shares</td>-->
-                    </tr>
-                    <tr>
-                        <td class="cheat">
-                            Stock Ticker
-                        </td>
-                        <!--<td>enter function to display total amount</td>-->
-                    </tr>
-                    <tr>
-                        <td class="cheat">
-                            Total Amount
-                        </td>
-                        <!--<td>enter function to display total amount</td>-->
-                    </tr>
-                </table>
-               <div class="extra">
-                    <a href="admin-dash.html">
-                        <button>cancel</button>
-                    </a>
-                    <input type="reset" value="clear">
-                    <a href="admin-conf.html">
-                        <button type="submit">submit</button>
-                    </a>
-                </div>
-            </div>     
-        </div>
-    </body>
-</html>
+<form id="stockForm">
+    <label for="company">Company Name*</label><br>
+    <input type="text" id="company" required><br>
+
+    <label for="ticker">Stock Ticker*</label><br>
+    <input type="text" id="ticker" required><br>
+
+    <label for="initial">Initial Price*</label><br>
+    <input type="number" id="initial" required><br>
+
+    <button type="submit">Submit</button>
+</form>
+
+<script>
+// Listen for form submission to send data to Django API
+document.getElementById("stockForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    
+    const company = document.getElementById("company").value;
+    const ticker = document.getElementById("ticker").value;
+    const initialPrice = document.getElementById("initial").value;
+
+    fetch("https://stock-trading-system-production.up.railway.app/api/stocks/add/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            company_name: company,
+            ticker: ticker,
+            price: parseFloat(initialPrice),
+            volume: 1000
+        })
+    })
+    .then(response => response.json())
+    .then(data => alert("Stock added successfully!"))
+    .catch(error => console.error("Error adding stock:", error));
+});
+</script>
