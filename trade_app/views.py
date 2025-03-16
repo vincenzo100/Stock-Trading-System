@@ -51,12 +51,12 @@ def login_user(request):
         return JsonResponse({'message': 'Login successful'})
     return JsonResponse({'error': 'Invalid credentials'}, status=400)
 
-# Buy Stocks 
+# Buy Stocks
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def buy_stock(request):
     user = request.user
-    ticker = request.data.get('ticker')  
+    ticker = request.data.get('ticker')  #
     quantity = int(request.data.get('quantity'))
 
     stock = get_object_or_404(Stock, ticker=ticker)
@@ -77,7 +77,7 @@ def buy_stock(request):
     else:
         return JsonResponse({'error': 'Insufficient funds'}, status=400)
 
-# Sell Stocks
+# Sell Stocks 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def sell_stock(request):
@@ -104,7 +104,7 @@ def sell_stock(request):
     else:
         return JsonResponse({'error': 'Not enough shares'}, status=400)
 
-# Deposit Cash (Previously Missing Function)
+# Deposit Cash 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def deposit_cash(request):
@@ -122,20 +122,25 @@ def deposit_cash(request):
 
     return JsonResponse({'message': f'Deposited ${amount} successfully'})
 
-# Update Stock Price (Fixes API Key Naming)
-@api_view(['PATCH'])
-@permission_classes([IsAuthenticated, IsAdminUser])
-def update_stock_price(request, ticker):
-    stock = get_object_or_404(Stock, ticker=ticker)
-    new_price = float(request.data.get('price'))
-    stock.price = new_price
-    stock.save()
-    return JsonResponse({'message': f'Stock {stock.ticker} price updated to ${new_price}'})
+# Withdraw Cash 
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def withdraw_cash(request):
+    user = request.user
+    amount = request.data.get("amount")
 
-# Delete Stock (Fixes API Key Naming)
-@api_view(['DELETE'])
-@permission_classes([IsAuthenticated, IsAdminUser])
-def delete_stock(request, ticker):
-    stock = get_object_or_404(Stock, ticker=ticker)
-    stock.delete()
-    return JsonResponse({'message': f'Stock {ticker} deleted successfully'})
+    if not amount or float(amount) <= 0:
+        return JsonResponse({'error': 'Withdrawal amount must be greater than zero'}, status=400)
+
+    portfolio = Portfolio.objects.get(user=user)
+
+    if portfolio.cash_balance < float(amount):
+        return JsonResponse({'error': 'Insufficient funds'}, status=400)
+
+    portfolio.cash_balance -= float(amount)
+    portfolio.save()
+
+    Transaction.objects.create(user=user, transaction_type='WITHDRAW', amount=amount)
+
+    return JsonResponse({'message': f'Withdrew ${amount} successfully'})
+
