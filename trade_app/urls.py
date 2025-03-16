@@ -17,3 +17,4 @@ urlpatterns = [
     path("stocks/update/<str:ticker>/", update_stock_price, name="update_stock_price"),
     path("stocks/delete/<str:ticker>/", delete_stock, name="delete_stock"),
 ]
+
