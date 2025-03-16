@@ -22,7 +22,3 @@ function updateMarketHours() {
     .then(data => alert("Market hours updated successfully!"))
     .catch(error => console.error("Error updating market hours:", error));
 }
-
-function toggleMarketDay(day) {
-    alert(`Market availability toggled for ${day}`); 
-}
