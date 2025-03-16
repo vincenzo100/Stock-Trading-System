@@ -11,34 +11,36 @@ from .serializers import StockSerializer, PortfolioSerializer, PortfolioStockSer
 # Fetch a Single Stock by Ticker
 @api_view(['GET'])
 def get_stock(request, ticker):
-    stock = get_object_or_404(Stock, ticker=ticker)  # Prevents 404 issues
+    stock = get_object_or_404(Stock, ticker=ticker)
     serializer = StockSerializer(stock)
     return Response(serializer.data)
 
-# List All Stocks (Now Updates Prices Before Sending to Frontend)
+# List All Stocks 
 @api_view(['GET'])
 def list_stocks(request):
     stocks = Stock.objects.all()
-    for stock in stocks:
-        stock.update_price()  # Update stock prices before sending to frontend
+    print(f"DEBUG: Found {stocks.count()} stocks")  # Debugging log
     serializer = StockSerializer(stocks, many=True)
     return Response(serializer.data)
 
-# User Registration
+# User Registration 
 @api_view(['POST'])
 def register_user(request):
     username = request.data.get('username')
     password = request.data.get('password')
     email = request.data.get('email')
 
+    if not username or not password or not email:
+        return JsonResponse({'error': 'All fields are required'}, status=400)
+
     if User.objects.filter(username=username).exists():
         return JsonResponse({'error': 'Username already taken'}, status=400)
 
     user = User.objects.create_user(username=username, password=password, email=email)
-    Portfolio.objects.create(user=user)  # Create portfolio for new user
+    Portfolio.objects.create(user=user)
     return JsonResponse({'message': 'User created successfully'})
 
-# User Login
+# User Login (Returns JWT Token)
 @api_view(['POST'])
 def login_user(request):
     username = request.data.get('username')
@@ -50,15 +52,15 @@ def login_user(request):
         return JsonResponse({'message': 'Login successful'})
     return JsonResponse({'error': 'Invalid credentials'}, status=400)
 
-# Buy Stocks
+
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def buy_stock(request):
     user = request.user
-    stock_ticker = request.data.get('stock_ticker')
+    ticker = request.data.get('ticker')  
     quantity = int(request.data.get('quantity'))
 
-    stock = get_object_or_404(Stock, ticker=stock_ticker)
+    stock = get_object_or_404(Stock, ticker=ticker)
 
     total_price = stock.price * quantity
     portfolio = Portfolio.objects.get(user=user)
@@ -76,15 +78,14 @@ def buy_stock(request):
     else:
         return JsonResponse({'error': 'Insufficient funds'}, status=400)
 
-# Sell Stocks
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def sell_stock(request):
     user = request.user
-    stock_ticker = request.data.get('stock_ticker')
+    ticker = request.data.get('ticker')  
     quantity = int(request.data.get('quantity'))
 
-    stock = get_object_or_404(Stock, ticker=stock_ticker)
+    stock = get_object_or_404(Stock, ticker=ticker)
     portfolio = Portfolio.objects.get(user=user)
     portfolio_stock = PortfolioStock.objects.filter(portfolio=portfolio, stock=stock).first()
 
@@ -103,60 +104,7 @@ def sell_stock(request):
     else:
         return JsonResponse({'error': 'Not enough shares'}, status=400)
 
-# Deposit Cash
-@api_view(['POST'])
-@permission_classes([IsAuthenticated])
-def deposit_cash(request):
-    user = request.user
-    amount = float(request.data.get('amount'))
-
-    if amount <= 0:
-        return JsonResponse({'error': 'Deposit amount must be greater than zero'}, status=400)
-
-    portfolio = Portfolio.objects.get(user=user)
-    portfolio.cash_balance += amount
-    portfolio.save()
-
-    Transaction.objects.create(user=user, transaction_type='DEPOSIT', amount=amount)
-
-    return JsonResponse({'message': f'Deposited ${amount} successfully'})
-
-# Withdraw Cash
-@api_view(['POST'])
-@permission_classes([IsAuthenticated])
-def withdraw_cash(request):
-    user = request.user
-    amount = float(request.data.get('amount'))
-    portfolio = Portfolio.objects.get(user=user)
-
-    if amount <= 0:
-        return JsonResponse({'error': 'Withdrawal amount must be greater than zero'}, status=400)
-    if portfolio.cash_balance < amount:
-        return JsonResponse({'error': 'Insufficient funds'}, status=400)
-
-    portfolio.cash_balance -= amount
-    portfolio.save()
-
-    Transaction.objects.create(user=user, transaction_type='WITHDRAW', amount=amount)
-
-    return JsonResponse({'message': f'Withdrew ${amount} successfully'})
-
-# Add New Stock (Admin Only)
-@api_view(['POST'])
-@permission_classes([IsAuthenticated, IsAdminUser])
-def add_stock(request):
-    ticker = request.data.get('ticker')
-    company_name = request.data.get('company_name')
-    price = float(request.data.get('price'))
-    volume = int(request.data.get('volume'))
-
-    if Stock.objects.filter(ticker=ticker).exists():
-        return JsonResponse({'error': 'Stock ticker already exists'}, status=400)
-
-    stock = Stock.objects.create(ticker=ticker, company_name=company_name, price=price, volume=volume)
-    return JsonResponse({'message': f'Stock {stock.ticker} added successfully'})
-
-# Update Stock Price (Admin Only)
+# Update Stock Price (Fixes API Key Naming)
 @api_view(['PATCH'])
 @permission_classes([IsAuthenticated, IsAdminUser])
 def update_stock_price(request, ticker):
@@ -164,15 +112,12 @@ def update_stock_price(request, ticker):
     new_price = float(request.data.get('price'))
     stock.price = new_price
     stock.save()
-
     return JsonResponse({'message': f'Stock {stock.ticker} price updated to ${new_price}'})
 
-#  Delete Stock (Admin Only)
+# Delete Stock (Fixes API Key Naming)
 @api_view(['DELETE'])
 @permission_classes([IsAuthenticated, IsAdminUser])
 def delete_stock(request, ticker):
     stock = get_object_or_404(Stock, ticker=ticker)
     stock.delete()
     return JsonResponse({'message': f'Stock {ticker} deleted successfully'})
-
-

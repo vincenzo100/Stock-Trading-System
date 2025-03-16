@@ -5,12 +5,12 @@ from .views import (
 )
 
 urlpatterns = [
-    # User Authentication
+    # User Authentication Endpoints
     path("api/register/", register_user, name="register"),
     path("api/login/", login_user, name="login"),
 
-    # Stock Listings & Trading
-    path("api/stocks/", list_stocks, name="list_stocks"),  # Matches TEST.docx
+    # Stock Listings & Trading Endpoints
+    path("api/stocks/", list_stocks, name="list_stocks"),  
     path("api/stocks/<str:ticker>/", get_stock, name="get_stock"),  # Fetch single stock
     path("api/buy/", buy_stock, name="buy_stock"),
     path("api/sell/", sell_stock, name="sell_stock"),
