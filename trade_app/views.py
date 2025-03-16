@@ -8,34 +8,24 @@ from django.shortcuts import get_object_or_404
 from .models import Stock, Portfolio, PortfolioStock, Transaction
 from .serializers import StockSerializer, PortfolioSerializer, PortfolioStockSerializer, TransactionSerializer, UserSerializer
 
-# Sell Stocks 
+# User Registration (Fixes Missing Function)
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
-def sell_stock(request):
+def register_user(request):
     """
-    Allows users to sell stocks from their portfolio.
-    Ensures user owns enough shares before selling.
-    Updates portfolio and transaction records.
+    Allows a new user to register an account.
+    Ensures username, email, and password are provided.
+    Returns an error if the username is already taken.
     """
-    user = request.user
-    ticker = request.data.get('ticker')  
-    quantity = int(request.data.get('quantity'))
+    username = request.data.get('username')
+    password = request.data.get('password')
+    email = request.data.get('email')
 
-    stock = get_object_or_404(Stock, ticker=ticker)
-    portfolio = Portfolio.objects.get(user=user)
-    portfolio_stock = PortfolioStock.objects.filter(portfolio=portfolio, stock=stock).first()
+    if not username or not password or not email:
+        return JsonResponse({'error': 'All fields are required'}, status=400)
 
-    if portfolio_stock and portfolio_stock.shares >= quantity:
-        portfolio_stock.shares -= quantity
-        if portfolio_stock.shares == 0:
-            portfolio_stock.delete()
-        else:
-            portfolio_stock.save()
+    if User.objects.filter(username=username).exists():
+        return JsonResponse({'error': 'Username already taken'}, status=400)
 
-        portfolio.cash_balance += stock.price * quantity
-        portfolio.save()
-
-        Transaction.objects.create(user=user, stock=stock, transaction_type='SELL', amount=stock.price * quantity)
-        return JsonResponse({'message': 'Stock sold successfully'})
-    else:
-        return JsonResponse({'error': 'Not enough shares'}, status=400)
+    user = User.objects.create_user(username=username, password=password, email=email)
+    Portfolio.objects.create(user=user)  
+    return JsonResponse({'message': 'User created successfully'})
