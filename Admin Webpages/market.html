@@ -1,11 +1,10 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>KVB Admin - Market Hours</title>
         <link rel="stylesheet" href="market-layout.css">
         <link rel="stylesheet" href="market-styles.css">
-        <link rel="stylesheet" href="/User Webpages/nav-bar.css">
+        <script defer src="market.js"></script> <!-- JavaScript added for API calls -->
     </head>
     <header>
         <table class="logo">
@@ -14,59 +13,31 @@
         <table class="nav">
             <td><a href="admin-login.html">Log Out</a></td>
         </table>
-        <table class="line">
-            <tr></tr>
-        </table>
     </header>
-    <!--always copy above text for nav bar-->
     <body>
         <table class="title">
-            <tr>
-                <td>Market Hours</td>
-            </tr>
+            <tr><td>Market Hours</td></tr>
         </table>
-    <!--always copy above for page title-->
         <div class="bod">
             <table class="DT">
+                <tr><th>Days*</th></tr>
                 <tr>
-                    <th>Days*</th>
+                    <td><button onclick="toggleMarketDay('Sunday')">S</button></td>
+                    <td><button onclick="toggleMarketDay('Monday')">M</button></td>
+                    <td><button onclick="toggleMarketDay('Tuesday')">T</button></td>
+                    <td><button onclick="toggleMarketDay('Wednesday')">W</button></td>
+                    <td><button onclick="toggleMarketDay('Thursday')">T</button></td>
+                    <td><button onclick="toggleMarketDay('Friday')">F</button></td>
+                    <td><button onclick="toggleMarketDay('Saturday')">S</button></td>
                 </tr>
+                <tr><th>Time*</th></tr>
                 <tr>
-                    <script src="market.js"></script>
-                    <td><button id="demo" onclick="myFunction()">S</button></td>
-                    <td><button id="demo" onclick="myFunction()">M</button></td>
-                    <td><button id="demo" onclick="myFunction()">T</button></td>
-                    <td><button id="demo" onclick="myFunction()">W</button></td>
-                    <td><button id="demo" onclick="myFunction()">T</button></td>
-                    <td><button id="demo" onclick="myFunction()">F</button></td>
-                    <td><button id="demo" onclick="myFunction()">S</button></td>
-                </tr>
-                <tr>
-                    <th>Time*</th>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="start">
-                            <input type="time" id="time" min="00:00" max="23:59" value="00:00" required />
-                        </div>
-                    </td>
+                    <td><input type="time" id="startTime"></td>
                     <td>to</td>
-                    <td>
-                        <div class="end">
-                            <input type="time" id="time" min="00:00" max="23:59" value="00:00" required />
-                        </div>
-                    </td>
+                    <td><input type="time" id="endTime"></td>
                 </tr>
             </table>
-            <div class="extra">
-                <a href="user-dash.html">
-                    <button>cancel</button>
-                </a>
-                <input type="reset" value="clear">
-                <a href="conf-market.html">
-                    <button type="submit">submit</button>
-                </a>
-            </div>
+            <button onclick="updateMarketHours()">Update Market Hours</button>
         </div>
     </body>
 </html>

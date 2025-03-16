@@ -1,11 +1,9 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>KVB Stocks - Transaction History</title>
         <link rel="stylesheet" href="user-trans-layout.css">
         <link rel="stylesheet" href="user-trans-styles.css">
-        <link rel="stylesheet" href="nav-bar.css">
     </head>
     <header>
         <table class="logo">
@@ -16,39 +14,40 @@
             <td><a href="user-port.html">Portfolio</a></td>
             <td><a href="user-login.html">Log Out</a></td>
         </table>
-        <table class="line">
-            <tr></tr>
-        </table>
     </header>
-    <!--always copy above text for nav bar-->
     <body>
         <table class="title">
             <td>Transaction History</td>
         </table>
         <div class="bod">
             <table class="header">
-                <tr>
-                    <td class="item">Date</td>
-                    <td class="item">ID</td>
-                    <td class="item">Type</td>
-                    <td class="item">Description</td>
-                    <td class="item">Amount</td>
-                </tr>
-                <tr>
-                    <td class="data">notes</td><!--insert function that shows date-->
-                    <td class="data">notes</td><!--insert function that shows id-->
-                    <td class="data">notes</td><!--insert function that shows type-->
-                    <td class="data">notes</td><!--insert function that shows description-->
-                    <td class="data">notes</td><!--insert function that shows amount--> 
-                </tr>
-                <tr>
-                    <td class="data">notes</td><!--insert function that shows date-->
-                    <td class="data">notes</td><!--insert function that shows id-->
-                    <td class="data">notes</td><!--insert function that shows type-->
-                    <td class="data">notes</td><!--insert function that shows description-->
-                    <td class="data">notes</td><!--insert function that shows amount-->
-                </tr>
+                <tr><th>Date</th><th>Type</th><th>Stock</th><th>Shares</th><th>Amount</th></tr>
+                <tbody id="transaction-list"></tbody> <!-- Transactions will be inserted here -->
             </table>
         </div>
+        <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const token = localStorage.getItem("token");
+
+            fetch("https://stock-trading-system-production.up.railway.app/api/getTransactions/", {
+                headers: { "Authorization": `Bearer ${token}` }
+            })
+            .then(response => response.json())
+            .then(data => {
+                let transactionList = "";
+                data.transactions.forEach(transaction => {
+                    transactionList += `<tr>
+                        <td>${transaction.timestamp}</td>
+                        <td>${transaction.transaction_type}</td>
+                        <td>${transaction.stock_ticker}</td>
+                        <td>${transaction.quantity}</td>
+                        <td>$${transaction.price_at_transaction.toFixed(2)}</td>
+                    </tr>`;
+                });
+                document.getElementById("transaction-list").innerHTML = transactionList;
+            })
+            .catch(error => console.error("Error fetching transactions:", error));
+        });
+        </script>
     </body>
 </html>
