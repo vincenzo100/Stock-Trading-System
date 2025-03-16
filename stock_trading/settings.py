@@ -11,7 +11,6 @@ pymysql.install_as_MySQLdb()
 BASE_DIR = Path(__file__).resolve().parent.parent
 ENV_PATH = BASE_DIR / ".env"
 
-# Debugging: Print ENV_PATH to check if Django is looking in the correct location
 print(f"Loading .env from: {ENV_PATH}")
 
 if ENV_PATH.exists():
@@ -19,28 +18,25 @@ if ENV_PATH.exists():
 else:
     print(f"⚠️ WARNING: .env file not found at {ENV_PATH}. Ensure it's in the correct location.")
 
-# SECURITY WARNING: Keep the secret key used in production secret!
+
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 
-# Debugging: Print SECRET_KEY value (ensure this only runs in local development)
 if SECRET_KEY:
-    print(f"SECRET_KEY loaded: {SECRET_KEY[:10]}********")  # Only prints part of the key for security
+    print(f"SECRET_KEY loaded: {SECRET_KEY[:10]}********")  #  Only prints part of the key for security
 
-# Ensure SECRET_KEY is set, otherwise raise an error
 if not SECRET_KEY:
-    raise ValueError("DJANGO_SECRET_KEY is not set. Please check .env or Railway environment variables.")
+    raise ValueError("DJANGO_SECRET_KEY is not set. Please check Railway environment variables or .env file.")
 
-# SECURITY WARNING: Don't run with debug turned on in production!
+
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
-# Allow both local development & production domains
+# Allowed Hosts & CSRF Settings
 ALLOWED_HOSTS = [
     "127.0.0.1",
     "localhost",
     "stock-trading-system-production.up.railway.app",
 ]
 
-# CSRF Trusted Origins (For security when sending requests)
 CSRF_TRUSTED_ORIGINS = [
     "http://127.0.0.1",
     "http://localhost",
@@ -78,27 +74,19 @@ CORS_ALLOWED_ORIGINS = [
     "https://stock-trading-system-production.up.railway.app",
 ]
 
-CORS_ALLOW_METHODS = [
-    "GET",
-    "POST",
-    "PUT",
-    "PATCH",
-    "DELETE",
-    "OPTIONS",
-]
-
-CORS_ALLOW_HEADERS = [
-    "content-type",
-    "authorization",
-]
+CORS_ALLOW_METHODS = ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
+CORS_ALLOW_HEADERS = ["content-type", "authorization"]
 
 # Database Configuration (MySQL on Railway)
 DATABASE_URL = os.getenv("DATABASE_URL")
 
-# Ensure DATABASE_URL is not empty
 if not DATABASE_URL:
     raise ValueError("DATABASE_URL is not set. Please check Railway environment variables or .env file.")
 
+# Debugging: Print the database URL to verify it's loading correctly
+print(f"Using DATABASE_URL: {DATABASE_URL}")
+
+# Parse the database URL correctly for Django
 DATABASES = {
     "default": dj_database_url.parse(DATABASE_URL, conn_max_age=600)
 }
@@ -109,12 +97,17 @@ PORT = os.getenv("PORT", "8000")
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_DIRS = [BASE_DIR / "static"]
 
-# Default primary key field type
+STATIC_DIR = BASE_DIR / "static"
+if STATIC_DIR.exists():
+    STATICFILES_DIRS = [STATIC_DIR]
+else:
+    STATICFILES_DIRS = []  # Prevents Django from looking for a missing directory
+
+#  Default primary key field type
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# Fix for Django Admin (Ensures it loads properly)
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
@@ -131,8 +124,8 @@ TEMPLATES = [
     },
 ]
 
-# Fix for ROOT_URLCONF
+
 ROOT_URLCONF = "stock_trading.urls"
 
-# WSGI application path
+#  WSGI application path
 WSGI_APPLICATION = "stock_trading.wsgi.application"
