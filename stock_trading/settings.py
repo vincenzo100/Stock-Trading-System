@@ -7,20 +7,20 @@ from pathlib import Path
 # Ensure PyMySQL is used instead of MySQLdb
 pymysql.install_as_MySQLdb()
 
-# Force load .env file from the correct location
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-ENV_PATH = os.path.join(BASE_DIR, ".env")
+# Load environment variables
+BASE_DIR = Path(__file__).resolve().parent.parent
+ENV_PATH = BASE_DIR / ".env"
 
 # Debugging: Print ENV_PATH to check if Django is looking in the correct location
 print(f"Loading .env from: {ENV_PATH}")
 
-if not os.path.exists(ENV_PATH):
-    raise FileNotFoundError(f".env file not found at {ENV_PATH}. Ensure it's in the correct location.")
-
-load_dotenv(ENV_PATH)  # Ensures Django loads .env
+if ENV_PATH.exists():
+    load_dotenv(ENV_PATH)  # Load local .env if available
+else:
+    print(f"⚠️ WARNING: .env file not found at {ENV_PATH}. Ensure it's in the correct location.")
 
 # SECURITY WARNING: Keep the secret key used in production secret!
-SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 
 # Debugging: Print SECRET_KEY value (ensure this only runs in local development)
 if SECRET_KEY:
@@ -31,51 +31,51 @@ if not SECRET_KEY:
     raise ValueError("DJANGO_SECRET_KEY is not set. Please check .env or Railway environment variables.")
 
 # SECURITY WARNING: Don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', 'False') == 'True'
+DEBUG = os.getenv("DEBUG", "False") == "True"
 
-# Allowed Hosts (Prevents DisallowedHost errors)
+# Allow both local development & production domains
 ALLOWED_HOSTS = [
-    "127.0.0.1",  # Local development
+    "127.0.0.1",
     "localhost",
-    "stock-trading-system-production.up.railway.app",  # Railway deployment
+    "stock-trading-system-production.up.railway.app",
 ]
 
 # CSRF Trusted Origins (For security when sending requests)
 CSRF_TRUSTED_ORIGINS = [
-    "http://127.0.0.1",  # Allow local debugging
+    "http://127.0.0.1",
     "http://localhost",
     "https://stock-trading-system-production.up.railway.app",
 ]
 
 # Application definition
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'rest_framework',
-    'corsheaders',  # Enables CORS for frontend requests
-    'trade_app',  # Your Django application
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "rest_framework",
+    "corsheaders",  # Enables CORS for frontend requests
+    "trade_app",  # Your Django application
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',  # Enables CORS
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "corsheaders.middleware.CorsMiddleware",  # Enables CORS
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
 # CORS Settings (Ensures frontend can make API calls)
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # Local frontend (React, Vue, etc.)
-    "http://127.0.0.1:8000",  # Allow local API testing
-    "https://stock-trading-system-production.up.railway.app",  # Production backend
+    "http://localhost:3000",
+    "http://127.0.0.1:8000",  # Local API testing
+    "https://stock-trading-system-production.up.railway.app",
 ]
 
 CORS_ALLOW_METHODS = [
@@ -93,19 +93,23 @@ CORS_ALLOW_HEADERS = [
 ]
 
 # Database Configuration (MySQL on Railway)
-DATABASE_URL = os.getenv('DATABASE_URL')
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 # Ensure DATABASE_URL is not empty
 if not DATABASE_URL:
     raise ValueError("DATABASE_URL is not set. Please check Railway environment variables or .env file.")
 
 DATABASES = {
-    'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600)
+    "default": dj_database_url.parse(DATABASE_URL, conn_max_age=600)
 }
+
+# Port Configuration for Railway
+PORT = os.getenv("PORT", "8000")
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = "/static/"
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_DIRS = [BASE_DIR / "static"]
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
