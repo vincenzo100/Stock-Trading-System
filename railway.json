@@ -1,0 +1,16 @@
+{
+    "build": {
+      "builder": "nixpacks",
+      "nixpacksPlan": {
+        "phases": {
+          "install": {
+            "cmds": ["apt-get update && apt-get install -y python3"]
+          },
+          "start": {
+            "cmds": ["python3 -m http.server 3000"]
+          }
+        }
+      }
+    }
+  }
+  
