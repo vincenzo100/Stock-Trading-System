@@ -1,7 +1,11 @@
+const API_BASE_URL = "https://stock-trading-system-production.up.railway.app/api/";  // Backend URL defined once
+
 document.addEventListener("DOMContentLoaded", function() {
-    // Fetch all stocks from Django backend when the page loads
-    fetch("https://stock-trading-system-production.up.railway.app/api/stocks/")
-        .then(response => response.json())
+    fetch(`${API_BASE_URL}stocks/`)  // Uses base URL dynamically
+        .then(response => {
+            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+            return response.json();
+        })
         .then(data => {
             let stockList = "";
             data.forEach(stock => {
@@ -18,12 +22,17 @@ document.addEventListener("DOMContentLoaded", function() {
         .catch(error => console.error("Error fetching stocks:", error));
 });
 
-// Function to delete a stock using Django API
 function deleteStock(ticker) {
-    fetch(`https://stock-trading-system-production.up.railway.app/api/stocks/delete/${ticker}/`, {
+    fetch(`${API_BASE_URL}stocks/delete/${ticker}/`, {  // Uses base URL dynamically
         method: "DELETE"
     })
-    .then(response => response.json())
-    .then(data => alert(data.message))
+    .then(response => {
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+        return response.json();
+    })
+    .then(data => {
+        alert(data.message);
+        location.reload(); // Refreshes the page after deleting a stock
+    })
     .catch(error => console.error("Error deleting stock:", error));
 }
