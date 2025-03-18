@@ -1,4 +1,26 @@
 <html>
-<head><title>Test Page</title></head>
-<body><h1>Frontend Loaded Successfully!</h1></body>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>KVB Stocks - Admin Dashboard</title>
+        <link rel="stylesheet" href="admin-dash-layout.css">
+        <link rel="stylesheet" href="admin-dash-styles.css">
+        <script defer src="admin-dashboard.js"></script> <!-- Linked external JavaScript for API calls -->
+    </head>
+    <header>
+        <table class="logo">
+            <td><a class="logo" href="index.html">KVB Admin</a></td>
+        </table>
+        <table class="nav">
+            <td><a href="admin-login.html">Log Out</a></td>
+        </table>
+    </header>
+    <body>
+        <div class="container">
+            <table>
+                <tr><th>Company</th><th>Ticker</th><th>Price</th><th>Volume</th><th>Actions</th></tr>
+                <tbody id="admin-stock-list"></tbody> <!-- Dynamically filled by JavaScript -->
+            </table>
+        </div>
+    </body>
 </html>

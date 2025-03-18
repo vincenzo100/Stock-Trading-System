@@ -15,7 +15,9 @@
 </form>
 
 <script>
-// Listens for form submission to process buy/sell orders
+const API_BASE_URL = "https://stock-trading-system-production.up.railway.app/api/";  // Defined base API URL
+
+// Listen for trade form submission
 document.getElementById("tradeForm").addEventListener("submit", function(event) {
     event.preventDefault();
 
@@ -23,8 +25,7 @@ document.getElementById("tradeForm").addEventListener("submit", function(event) 
     const action = document.getElementById("action").value;
     const shares = document.getElementById("shares").value;
 
-    // Correct API URL ensures request goes to Django backend
-    fetch(`https://stock-trading-system-production.up.railway.app/api/${action}/`, {
+    fetch(`${API_BASE_URL}${action}/`, {  // Uses base URL dynamically
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -33,7 +34,10 @@ document.getElementById("tradeForm").addEventListener("submit", function(event) 
         })
     })
     .then(response => response.json())
-    .then(data => alert(data.message)) // Displays success message
+    .then(data => {
+        alert(data.message);
+        document.getElementById("tradeForm").reset();  // Clears form after submission
+    })
     .catch(error => console.error("Error processing trade:", error));
 });
 </script>

@@ -12,6 +12,8 @@
 </form>
 
 <script>
+const API_BASE_URL = "https://stock-trading-system-production.up.railway.app/api/";  // Define API base URL
+
 // Listen for form submission to send data to Django API
 document.getElementById("stockForm").addEventListener("submit", function(event) {
     event.preventDefault();
@@ -20,7 +22,7 @@ document.getElementById("stockForm").addEventListener("submit", function(event) 
     const ticker = document.getElementById("ticker").value;
     const initialPrice = document.getElementById("initial").value;
 
-    fetch("https://stock-trading-system-production.up.railway.app/api/stocks/add/", {
+    fetch(`${API_BASE_URL}stocks/add/`, {  // Uses base URL dynamically
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -31,7 +33,10 @@ document.getElementById("stockForm").addEventListener("submit", function(event) 
         })
     })
     .then(response => response.json())
-    .then(data => alert("Stock added successfully!"))
+    .then(data => {
+        alert("Stock added successfully!");
+        document.getElementById("stockForm").reset();  // Clears form after submission
+    })
     .catch(error => console.error("Error adding stock:", error));
 });
 </script>

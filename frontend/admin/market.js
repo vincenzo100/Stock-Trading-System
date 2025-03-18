@@ -1,11 +1,8 @@
-const API_BASE_URL = "https://stock-trading-system-production.up.railway.app/api/";  // Backend URL defined once
+const API_BASE_URL = "https://stock-trading-system-production.up.railway.app/api/";  // Backend API URL
 
 document.addEventListener("DOMContentLoaded", function() {
-    fetch(`${API_BASE_URL}market-hours/`)  // Uses base URL dynamically
-        .then(response => {
-            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-            return response.json();
-        })
+    fetch(`${API_BASE_URL}market-hours/`)  // Fetch market hours
+        .then(response => response.json())
         .then(data => {
             const startTimeInput = document.getElementById("startTime");
             const endTimeInput = document.getElementById("endTime");
@@ -29,15 +26,12 @@ function updateMarketHours() {
     const startTime = startTimeInput.value;
     const endTime = endTimeInput.value;
 
-    fetch(`${API_BASE_URL}market-hours/`, {  // Uses base URL dynamically
+    fetch(`${API_BASE_URL}market-hours/`, {  // Updates market hours
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ start_time: startTime, end_time: endTime })
     })
-    .then(response => {
-        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-        return response.json();
-    })
+    .then(response => response.json())
     .then(data => alert("Market hours updated successfully!"))
     .catch(error => console.error("Error updating market hours:", error));
 }

@@ -1,26 +1,54 @@
-<script>
-    // Fetch user portfolio from Django API
-    document.addEventListener("DOMContentLoaded", function() {
-        const token = localStorage.getItem("token");
-    
-        fetch("https://stock-trading-system-production.up.railway.app/api/getPortfolio/", {
-            headers: { "Authorization": `Bearer ${token}` }
-        })
-        .then(response => response.json())
-        .then(data => {
-            let tableBody = "";
-            data.stocks.forEach(stock => {
-                tableBody += `<tr>
-                    <td>${stock.company_name}</td>
-                    <td>${stock.ticker}</td>
-                    <td>${stock.shares}</td>
-                    <td>$${stock.price.toFixed(2)}</td>
-                    <td>$${(stock.shares * stock.price).toFixed(2)}</td>
-                </tr>`;
-            });
-            document.querySelector(".stocks").innerHTML += tableBody;
-        })
-        .catch(error => console.error("Error fetching portfolio:", error));
-    });
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>KVB Stocks - Portfolio</title>
+        <link rel="stylesheet" href="user-port-layout.css">
+        <link rel="stylesheet" href="user-port-styles.css">
+        <script defer src="user-port.js"></script> <!-- Linked to JavaScript for API calls -->
+    </head>
+    <header>
+        <table class="logo">
+            <td><a class="logo" href="/user-dash.html">KVB Stocks</a></td> <!-- Fixed path -->
+        </table>
+        <table class="nav">
+            <td><a href="/user-trans.html">Transactions</a></td> <!-- Fixed path -->
+            <td><a href="/user-login.html">Log Out</a></td> <!-- Fixed path -->
+        </table>
+    </header>
+    <body>
+        <div class="container">
+            <h2>My Portfolio</h2>
+            <table>
+                <tr><th>Stock</th><th>Quantity</th><th>Current Price</th><th>Total Value</th></tr>
+                <tbody id="portfolio-list"></tbody> <!-- Will be populated by JavaScript -->
+            </table>
+            <p id="no-stocks" style="display:none;">You do not own any stocks.</p> <!-- Message if portfolio is empty -->
+        </div>
+    </body>
+    <script>
+        const API_BASE_URL = "https://stock-trading-system-production.up.railway.app/api/";  // Backend API URL
+
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch(`${API_BASE_URL}portfolio/`)  // Uses base URL dynamically
+                .then(response => response.json())
+                .then(data => {
+                    let portfolioList = "";
+                    if (data.length === 0) {
+                        document.getElementById("no-stocks").style.display = "block"; // Show message if empty
+                    } else {
+                        data.forEach(stock => {
+                            let totalValue = stock.quantity * stock.current_price;
+                            portfolioList += `<tr>
+                                <td>${stock.ticker}</td>
+                                <td>${stock.quantity}</td>
+                                <td>$${stock.current_price.toFixed(2)}</td>
+                                <td>$${totalValue.toFixed(2)}</td>
+                            </tr>`;
+                        });
+                        document.getElementById("portfolio-list").innerHTML = portfolioList;
+                    }
+                })
+                .catch(error => console.error("Error fetching portfolio:", error));
+        });
     </script>
-    
+</html>

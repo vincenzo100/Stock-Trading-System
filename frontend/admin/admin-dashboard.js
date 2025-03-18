@@ -1,11 +1,8 @@
-const API_BASE_URL = "https://stock-trading-system-production.up.railway.app/api/";  // Backend URL defined once
+const API_BASE_URL = "https://stock-trading-system-production.up.railway.app/api/";  // Set backend API URL
 
 document.addEventListener("DOMContentLoaded", function() {
-    fetch(`${API_BASE_URL}stocks/`)  // Uses base URL dynamically
-        .then(response => {
-            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-            return response.json();
-        })
+    fetch(`${API_BASE_URL}stocks/`)  // Fetch stock data
+        .then(response => response.json())
         .then(data => {
             let stockList = "";
             data.forEach(stock => {
@@ -23,16 +20,13 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function deleteStock(ticker) {
-    fetch(`${API_BASE_URL}stocks/delete/${ticker}/`, {  // Uses base URL dynamically
+    fetch(`${API_BASE_URL}stocks/delete/${ticker}/`, {  // Uses dynamic API URL
         method: "DELETE"
     })
-    .then(response => {
-        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-        return response.json();
-    })
+    .then(response => response.json())
     .then(data => {
         alert(data.message);
-        location.reload(); // Refreshes the page after deleting a stock
+        location.reload(); // Refreshes page after deletion
     })
     .catch(error => console.error("Error deleting stock:", error));
 }

@@ -1,60 +1,54 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>KVB Stocks - All Stocks</title>
+        <title>KVB Stocks - View Stocks</title>
         <link rel="stylesheet" href="user-stocks-layout.css">
         <link rel="stylesheet" href="user-stocks-styles.css">
-        <link rel="stylesheet" href="nav-bar.css">
+        <script defer src="user-stocks.js"></script> <!-- Linked to JavaScript for API calls -->
     </head>
     <header>
         <table class="logo">
-            <td><a class="logo" href="user-dash.html">KVB Stocks</a></td>
+            <td><a class="logo" href="/user-dash.html">KVB Stocks</a></td> <!-- Fixed path -->
         </table>
         <table class="nav">
-            <td><a href="user-trans.html">Transactions</a></td>
-            <td><a href="user-port.html">Portfolio</a></td>
-            <td><a href="user-login.html">Log Out</a></td>
-        </table>
-        <table class="line">
-            <tr></tr>
+            <td><a href="/user-trans.html">Transactions</a></td> <!-- Fixed path -->
+            <td><a href="/user-port.html">Portfolio</a></td> <!-- Fixed path -->
+            <td><a href="/user-login.html">Log Out</a></td> <!-- Fixed path -->
         </table>
     </header>
-    <!--always copy above text for nav bar-->
     <body>
-        <table class="title">
-            <tr>
-                <td>All Stocks</td>
-            </tr>
-            <tr>
-                <td>This is the list of all available stocks we have for trading.</td>
-            </tr>
-        </table>
-    <!--always copy above for page title-->
-        <div class="bod">
-            <table class="header">
-                <tr>
-                    <td class="item">Name</td>
-                    <td class="item">Ticker</td>
-                    <td class="item">Price</td>
-                    <td class="item">Volume</td>
-                    <td class="item">Market Cap</td>
-                </tr>
-                <tr>
-                    <td class="data">notes</td><!--insert function that shows name-->
-                    <td class="data">notes</td><!--insert function that shows ticker-->
-                    <td class="data">notes</td><!--insert function that shows price-->
-                    <td class="data">notes</td><!--insert function that shows volume-->
-                    <td class="data">notes</td><!--insert function that shows market cap--> 
-                </tr>
-                <tr>
-                    <td class="data">notes</td><!--insert function that shows name-->
-                    <td class="data">notes</td><!--insert function that shows ticker-->
-                    <td class="data">notes</td><!--insert function that shows price-->
-                    <td class="data">notes</td><!--insert function that shows volume-->
-                    <td class="data">notes</td><!--insert function that shows market cap--> 
-                </tr>
+        <div class="container">
+            <h2>Available Stocks</h2>
+            <table>
+                <tr><th>Stock</th><th>Ticker</th><th>Price</th><th>Volume</th></tr>
+                <tbody id="stocks-list"></tbody> <!-- Will be populated by JavaScript -->
             </table>
+            <p id="no-stocks" style="display:none;">No stocks available.</p> <!-- Message if stocks list is empty -->
         </div>
     </body>
+    <script>
+        const API_BASE_URL = "https://stock-trading-system-production.up.railway.app/api/";  // Backend API URL
+
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch(`${API_BASE_URL}stocks/`)  // Uses base URL dynamically
+                .then(response => response.json())
+                .then(data => {
+                    let stocksList = "";
+                    if (data.length === 0) {
+                        document.getElementById("no-stocks").style.display = "block"; // Show message if empty
+                    } else {
+                        data.forEach(stock => {
+                            stocksList += `<tr>
+                                <td>${stock.company_name}</td>
+                                <td>${stock.ticker}</td>
+                                <td>$${stock.price.toFixed(2)}</td>
+                                <td>${stock.volume}</td>
+                            </tr>`;
+                        });
+                        document.getElementById("stocks-list").innerHTML = stocksList;
+                    }
+                })
+                .catch(error => console.error("Error fetching stocks:", error));
+        });
+    </script>
 </html>
