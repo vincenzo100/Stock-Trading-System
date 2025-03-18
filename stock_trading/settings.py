@@ -40,7 +40,8 @@ ALLOWED_HOSTS = [
 CSRF_TRUSTED_ORIGINS = [
     "http://127.0.0.1",
     "http://localhost",
-    "https://stock-trading-system-production.up.railway.app",
+    "https://stock-trading-system-production.up.railway.app",  # Backend
+    "https://stock-trading-system.vercel.app",  # Vercel frontend URL
 ]
 
 # Application definition
@@ -67,12 +68,13 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-# CORS Settings (Ensures frontend can make API calls)
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "http://127.0.0.1:8000",  # Local API testing
-    "https://stock-trading-system-production.up.railway.app",
+    "http://localhost:3000",  # Local testing
+    "http://127.0.0.1:8000",  # Local testing
+    "https://stock-trading-system-production.up.railway.app",  # Backend on Railway
+    "https://stock-trading-system.vercel.app",  # Vercel frontend URL
 ]
+
 
 CORS_ALLOW_METHODS = ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
 CORS_ALLOW_HEADERS = ["content-type", "authorization"]
