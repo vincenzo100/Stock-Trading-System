@@ -3,9 +3,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>KVB Stocks - Admin Dashboard</title>
-        <link rel="stylesheet" href="admin-dash-layout.css">
-        <link rel="stylesheet" href="admin-dash-styles.css">
-        <script defer src="admin-dashboard.js"></script> <!-- Linked external JavaScript for API calls -->
+        <link rel="stylesheet" href="/admin/admin-dash-styles.css"> <!-- Fixed path -->
+        <script defer src="/admin/admin-dashboard.js"></script> <!-- Fixed path -->
     </head>
     <header>
         <table class="logo">
@@ -19,7 +18,7 @@
         <div class="container">
             <table>
                 <tr><th>Company</th><th>Ticker</th><th>Price</th><th>Volume</th><th>Actions</th></tr>
-                <tbody id="admin-stock-list"></tbody> <!-- This will be dynamically filled by JavaScript -->
+                <tbody id="admin-stock-list"></tbody> <!-- Dynamically filled by JavaScript -->
             </table>
         </div>
     </body>

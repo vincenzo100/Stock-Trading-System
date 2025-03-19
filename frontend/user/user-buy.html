@@ -1,43 +1,64 @@
-<form id="tradeForm">
-    <label for="ticker">Stock Ticker</label><br>
-    <input type="text" id="ticker" name="ticker" required><br>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>KVB Stocks - Buy/Sell Stocks</title>
+        <link rel="stylesheet" href="/admin/user-buy-styles.css"> <!-- Fixed path -->
+        <script defer src="/admin/user-buy.js"></script> <!-- Fixed path -->
+    </head>
+    <header>
+        <table class="logo">
+            <td><a class="logo" href="/user-dash.html">KVB Stocks</a></td> <!-- Fixed path -->
+        </table>
+        <table class="nav">
+            <td><a href="/user-trans.html">Transactions</a></td> <!-- Fixed path -->
+            <td><a href="/user-login.html">Log Out</a></td> <!-- Fixed path -->
+        </table>
+    </header>
+    <body>
+        <div class="container">
+            <h2>Buy or Sell Stocks</h2>
+            <form id="tradeForm">
+                <label for="ticker">Stock Ticker</label><br>
+                <input type="text" id="ticker" name="ticker" required><br>
 
-    <label for="action">Action</label><br>
-    <select id="action" name="action">
-        <option value="buy">Buy</option>
-        <option value="sell">Sell</option>
-    </select><br>
+                <label for="action">Action</label><br>
+                <select id="action" name="action">
+                    <option value="buy">Buy</option>
+                    <option value="sell">Sell</option>
+                </select><br>
 
-    <label for="shares">Number of Shares</label><br>
-    <input type="number" id="shares" name="shares" required><br>
+                <label for="shares">Number of Shares</label><br>
+                <input type="number" id="shares" name="shares" required><br>
 
-    <button type="submit">Submit</button>
-</form>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </body>
+    <script>
+        const API_BASE_URL = "https://stock-trading-system-production.up.railway.app/api/";  // Backend API URL
 
-<script>
-const API_BASE_URL = "https://stock-trading-system-production.up.railway.app/api/";  // Defined base API URL
+        // Listens for trade form submission
+        document.getElementById("tradeForm").addEventListener("submit", function(event) {
+            event.preventDefault();
 
-// Listen for trade form submission
-document.getElementById("tradeForm").addEventListener("submit", function(event) {
-    event.preventDefault();
+            const ticker = document.getElementById("ticker").value;
+            const action = document.getElementById("action").value;
+            const shares = document.getElementById("shares").value;
 
-    const ticker = document.getElementById("ticker").value;
-    const action = document.getElementById("action").value;
-    const shares = document.getElementById("shares").value;
-
-    fetch(`${API_BASE_URL}${action}/`, {  // Uses base URL dynamically
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            ticker: ticker,
-            quantity: parseInt(shares)
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        alert(data.message);
-        document.getElementById("tradeForm").reset();  // Clears form after submission
-    })
-    .catch(error => console.error("Error processing trade:", error));
-});
-</script>
+            fetch(`${API_BASE_URL}${action}/`, {  // Uses dynamic API URL
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    ticker: ticker,
+                    quantity: parseInt(shares)
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                document.getElementById("tradeForm").reset();  // Clears form after submission
+            })
+            .catch(error => console.error("Error processing trade:", error));
+        });
+    </script>
+</html>

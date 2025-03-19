@@ -1,36 +1,57 @@
-<form id="cashForm">
-    <label for="amount">Amount</label><br>
-    <input type="number" id="amount" name="amount" required><br>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>KVB Stocks - Transfer Cash</title>
+        <link rel="stylesheet" href="/admin/user-dep-styles.css"> <!-- Fixed path -->
+        <script defer src="/admin/user-dep.js"></script> <!-- Fixed path -->
+    </head>
+    <header>
+        <table class="logo">
+            <td><a class="logo" href="/user-dash.html">KVB Stocks</a></td> <!-- Fixed path -->
+        </table>
+        <table class="nav">
+            <td><a href="/user-trans.html">Transactions</a></td> <!-- Fixed path -->
+            <td><a href="/user-login.html">Log Out</a></td> <!-- Fixed path -->
+        </table>
+    </header>
+    <body>
+        <div class="container">
+            <h2>Deposit or Withdraw Cash</h2>
+            <form id="cashForm">
+                <label for="amount">Amount</label><br>
+                <input type="number" id="amount" name="amount" required><br>
 
-    <label for="action">Action</label><br>
-    <select id="action" name="action">
-        <option value="deposit">Deposit</option>
-        <option value="withdraw">Withdraw</option>
-    </select><br>
+                <label for="action">Action</label><br>
+                <select id="action" name="action">
+                    <option value="deposit">Deposit</option>
+                    <option value="withdraw">Withdraw</option>
+                </select><br>
 
-    <button type="submit">Submit</button>
-</form>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </body>
+    <script>
+        const API_BASE_URL = "https://stock-trading-system-production.up.railway.app/api/";  // Backend API URL
 
-<script>
-const API_BASE_URL = "https://stock-trading-system-production.up.railway.app/api/";  // Defined API base URL
+        // Listens for deposit/withdraw transactions
+        document.getElementById("cashForm").addEventListener("submit", function(event) {
+            event.preventDefault();
 
-// Listens for deposit/withdraw transactions
-document.getElementById("cashForm").addEventListener("submit", function(event) {
-    event.preventDefault();
+            const amount = document.getElementById("amount").value;
+            const action = document.getElementById("action").value;
 
-    const amount = document.getElementById("amount").value;
-    const action = document.getElementById("action").value;
-
-    fetch(`${API_BASE_URL}${action}/`, {  // Uses dynamic API URL
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount: parseFloat(amount) })
-    })
-    .then(response => response.json())
-    .then(data => {
-        alert(data.message);
-        document.getElementById("cashForm").reset();  // Clears form after submission
-    })
-    .catch(error => console.error("Error processing transaction:", error));
-});
-</script>
+            fetch(`${API_BASE_URL}${action}/`, {  // Uses dynamic API URL
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ amount: parseFloat(amount) })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                document.getElementById("cashForm").reset();  // Clears form after submission
+            })
+            .catch(error => console.error("Error processing transaction:", error));
+        });
+    </script>
+</html>
