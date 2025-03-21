@@ -10,7 +10,7 @@ urlpatterns = [
     path('', home),  # Default API Home Route
     path('admin/', admin.site.urls),  # Admin Panel
     path('api/', include('trade_app.urls')),  # Includes API routes from trade_app
-    path('', include('base.urls')), #KEA 03/20/2025 - needed to display webpages
+    path('', include('stock_trading.urls')), #KEA 03/20/2025 - needed to display webpages
 ]
 
 # Debugging Check: Ensure `trade_app.urls` is correctly loaded
