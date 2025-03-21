@@ -6,7 +6,6 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
-from django.shortcuts import render #KEA 03/20/2025
 
 # Delay importing models & serializers to prevent circular imports
 Stock = None
@@ -138,6 +137,4 @@ def sell_stock(request):
     else:
         return JsonResponse({'error': 'Not enough shares'}, status=400)
 
-#KEA - Webpages
-def dash(request):
-    return render(request, "user-dash.html")
+
