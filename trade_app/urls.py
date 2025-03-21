@@ -15,5 +15,4 @@ urlpatterns = [
     path("stocks/<str:ticker>/", views.get_stock, name="get_stock"),
     path("buy/", views.buy_stock, name="buy_stock"),
     path("sell/", views.sell_stock, name="sell_stock"),
-    path("user-dash/", views.dash, name="dash"), #KEA 03/20/2025
 ]
