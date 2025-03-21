@@ -55,7 +55,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "corsheaders",  # Enables CORS for frontend requests
     "trade_app",  # Your Django application
-    'base.apps.BaseConfig', #KEA 03/20/20225 - for webpages
+    'stock_trading.apps.BaseConfig', #KEA 03/20/20225 - for webpages
 ]
 
 MIDDLEWARE = [
@@ -101,8 +101,8 @@ PORT = os.getenv("PORT", "8000")
 STATIC_URL = "/static/"
 
 STATICFILES_DIRS = [
-    BASE_DIR / 'static' / 'admin', #KEA 03/20/2025 - css and js file path
-    BASE_DIR / 'static' / 'user', #KEA 03/20/2025 - css and js file path
+    BASE_DIR / 'frontend' / 'admin' / 'static' , #KEA 03/20/2025 - css and js file path for admin pages
+    BASE_DIR / 'frontend' / 'user' / 'static' , #KEA 03/20/2025 - css and js file path for user pages
 ]
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
@@ -121,8 +121,8 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
-            BASE_DIR / 'templates' / 'admin', #KEA 03/20/2025 - html file path
-            BASE_DIR / 'templates' / 'user', #KEA 03/20/2025 - html file path
+            BASE_DIR / 'frontend' / 'admin' / 'templates' , #KEA 03/20/2025 - html file path for admin
+            BASE_DIR / 'frontend' / 'user' / 'templates' , #KEA 03/20/2025 - html file path for users
         ],
         "APP_DIRS": True,
         "OPTIONS": {
