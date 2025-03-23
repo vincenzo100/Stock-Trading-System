@@ -1,36 +1,54 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>KVB Stocks - Transfer Cash</title>
-        <link rel="stylesheet" href="/admin/user-dep-styles.css"> <!-- Fixed path -->
-        <script defer src="/admin/user-dep.js"></script> <!-- Fixed path -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>KVB Stocks - Deposit/Withdraw Cash</title>
+        <link rel="stylesheet" href="user-dep-layout.css">
+        <link rel="stylesheet" href="user-dep-styles.css">
+        <link rel="stylesheet" href="nav-bar.css">
     </head>
     <header>
         <table class="logo">
-            <td><a class="logo" href="/user-dash.html">KVB Stocks</a></td> <!-- Fixed path -->
+            <td><a class="logo" href="user-dash.html">KVB Stocks</a></td>
         </table>
         <table class="nav">
-            <td><a href="/user-trans.html">Transactions</a></td> <!-- Fixed path -->
-            <td><a href="/user-login.html">Log Out</a></td> <!-- Fixed path -->
+            <td><a href="user-trans.html">Transactions</a></td>
+            <td><a href="user-port.html">Portfolio</a></td>
+            <td><a href="user-login.html">Log Out</a></td>
+        </table>
+        <table class="line">
+            <tr></tr>
         </table>
     </header>
+    <!--always copy above text for nav bar-->
     <body>
-        <div class="container">
-            <h2>Deposit or Withdraw Cash</h2>
-            <form id="cashForm">
+        <table class="title">
+            <tr>
+                <td>Transfer Cash</td>
+            </tr>
+        </table>
+    <!--always copy above for page title-->
+    <div class="bod">
+        <div class="right">
+            <form class="transfer">
                 <label for="amount">Amount</label><br>
-                <input type="number" id="amount" name="amount" required><br>
-
+                <!--fix input for amount to accept only numbers-->
+                <input type="text" id="amount" name="amount" required><br>
                 <label for="action">Action</label><br>
-                <select id="action" name="action">
+                <select id="action" name="action" required>
+                    <option value="none">Select</option>
                     <option value="deposit">Deposit</option>
                     <option value="withdraw">Withdraw</option>
                 </select><br>
-
-                <button type="submit">Submit</button>
+                <div class="extra">
+                    <button formaction="user-dash.html">cancel</button>
+                    <input type="reset" value="clear">
+                    <button type="submit" formaction="user-tconf.html">submit</button>
+                </div>
             </form>
-        </div>
-    </body>
+        </div>     
+    </div>
+</body>
     <script>
         const API_BASE_URL = "https://stock-trading-system-production.up.railway.app/api/";  // Backend API URL
 
