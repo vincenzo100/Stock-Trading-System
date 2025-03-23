@@ -1,15 +1,47 @@
-<form id="stockForm">
-    <label for="company">Company Name*</label><br>
-    <input type="text" id="company" required><br>
-
-    <label for="ticker">Stock Ticker*</label><br>
-    <input type="text" id="ticker" required><br>
-
-    <label for="initial">Initial Price*</label><br>
-    <input type="number" id="initial" required><br>
-
-    <button type="submit">Submit</button>
-</form>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>KVB Stocks - Stock Creation</title>
+        <link rel="stylesheet" href="admin-stock-layout.css">
+        <link rel="stylesheet" href="admin-stock-styles.css">
+        <link rel="stylesheet" href="/User Webpages/nav-bar.css">
+    </head>
+    <header>
+        <table class="logo">
+            <td><a class="logo" href="admin-dash.html">KVB Admin</a></td>
+        </table>
+        <table class="nav">
+            <td><a href="admin-login.html">Log Out</a></td>
+        </table>
+    </header>
+    <!--always copy above text for nav bar-->
+    <body>
+        <table class="title">
+            <tr>
+                <td>Create a Stock</td>
+            </tr>
+        </table>
+    <!--always copy above for page title-->
+        <div class="bod">
+            <div class="right">
+                <form>
+                    <label for="company">Company Name*</label><br>
+                    <input type="text" id="company" name="company" required><br>
+                    <label for="ticket">Stock Ticker*</label><br>
+                    <input type="text" id="ticker" name="ticker" required><br>
+                    <label for="initial">Initial Price*</label><br>
+                    <input type="text" id="initial" name="initial" required>
+                    <div class="extra">
+                        <!--fix cancel button because it won't work with required-->
+                        <button formaction="admin-dash.html">cancel</button>
+                        <input type="reset" value="clear">
+                        <button type="submit" formaction="admin-conf.html">submit</button>
+                    </div>
+                </form>
+            </div>     
+        </div>
+    </body>
 
 <script>
 const API_BASE_URL = "https://stock-trading-system-production.up.railway.app/api/";  // Define API base URL
@@ -40,3 +72,5 @@ document.getElementById("stockForm").addEventListener("submit", function(event) 
     .catch(error => console.error("Error adding stock:", error));
 });
 </script>
+
+</html>
