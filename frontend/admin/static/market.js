@@ -1,6 +1,6 @@
 const API_BASE_URL = "https://stock-trading-system-production.up.railway.app/api/";  // Backend API URL
 
-/* document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function() {
     fetch(`${API_BASE_URL}market-hours/`)  // Fetch market hours
         .then(response => response.json())
         .then(data => {
@@ -12,7 +12,7 @@ const API_BASE_URL = "https://stock-trading-system-production.up.railway.app/api
             }
         })
         .catch(error => console.error("Error fetching market hours:", error));
-}); */
+});
 
 function updateMarketHours() {
     const startTimeInput = document.getElementById("startTime");
@@ -35,6 +35,8 @@ function updateMarketHours() {
     .then(data => alert("Market hours updated successfully!"))
     .catch(error => console.error("Error updating market hours:", error));
 }
+
+//KEA 03/23/2025 - Added below to show that a button is selected
 
 function toggleMarketDay(day) {
     const weekday = document.getElementById(`button${day}`);
