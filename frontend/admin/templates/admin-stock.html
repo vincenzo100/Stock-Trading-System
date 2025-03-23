@@ -3,16 +3,16 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>KVB Stocks - Stock Creation</title>
-        <link rel="stylesheet" href="/static/admin-stock-layout.css">
-        <link rel="stylesheet" href="/static/admin-stock-styles.css">
-        <link rel="stylesheet" href="/user/static/nav-bar.css">
+        <link rel="stylesheet" href="../static/admin-stock-layout.css">
+        <link rel="stylesheet" href="../static/admin-stock-styles.css">
+        <link rel="stylesheet" href="../user/static/nav-bar.css">
     </head>
     <header>
         <table class="logo">
-            <td><a class="logo" href="/admin-dash.html">KVB Admin</a></td>
+            <td><a class="logo" href="./admin-dash.html">KVB Admin</a></td>
         </table>
         <table class="nav">
-            <td><a href="/admin-login.html">Log Out</a></td>
+            <td><a href="./admin-login.html">Log Out</a></td>
         </table>
     </header>
     <!--always copy above text for nav bar-->
@@ -34,43 +34,12 @@
                     <input type="text" id="initial" name="initial" required>
                     <div class="extra">
                         <!--fix cancel button because it won't work with required-->
-                        <button formaction="/admin-dash.html">cancel</button>
+                        <button formaction="./admin-dash.html">cancel</button>
                         <input type="reset" value="clear">
-                        <button type="submit" formaction="/admin-conf.html">submit</button>
+                        <button type="submit" id="stockForm" onclick="stockFormSubmit" formaction="./admin-conf.html">submit</button>
                     </div>
                 </form>
             </div>     
         </div>
     </body>
-
-<script>
-const API_BASE_URL = "https://stock-trading-system-production.up.railway.app/api/";  // Define API base URL
-
-// Listen for form submission to send data to Django API
-document.getElementById("stockForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-    
-    const company = document.getElementById("company").value;
-    const ticker = document.getElementById("ticker").value;
-    const initialPrice = document.getElementById("initial").value;
-
-    fetch(`${API_BASE_URL}stocks/add/`, {  // Uses base URL dynamically
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            company_name: company,
-            ticker: ticker,
-            price: parseFloat(initialPrice),
-            volume: 1000
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        alert("Stock added successfully!");
-        document.getElementById("stockForm").reset();  // Clears form after submission
-    })
-    .catch(error => console.error("Error adding stock:", error));
-});
-</script>
-
 </html>

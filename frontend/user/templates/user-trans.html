@@ -3,18 +3,18 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>KVB Stocks - Transaction History</title>
-        <link rel="stylesheet" href="/static/user-trans-layout.css">
-        <link rel="stylesheet" href="/static/user-trans-styles.css">
-        <link rel="stylesheet" href="/static/nav-bar.css">
+        <link rel="stylesheet" href="../static/user-trans-layout.css">
+        <link rel="stylesheet" href="../static/user-trans-styles.css">
+        <link rel="stylesheet" href="../static/nav-bar.css">
     </head>
     <header>
         <table class="logo">
-            <td><a class="logo" href="/user-dash.html">KVB Stocks</a></td>
+            <td><a class="logo" href="./user-dash.html">KVB Stocks</a></td>
         </table>
         <table class="nav">
-            <td><a href="/user-trans.html">Transactions</a></td>
-            <td><a href="/user-port.html">Portfolio</a></td>
-            <td><a href="/user-login.html">Log Out</a></td>
+            <td><a href="./user-trans.html">Transactions</a></td>
+            <td><a href="./user-port.html">Portfolio</a></td>
+            <td><a href="./user-login.html">Log Out</a></td>
         </table>
         <table class="line">
             <tr></tr>
@@ -34,41 +34,8 @@
                     <td class="item">Description</td>
                     <td class="item">Amount</td>
                 </tr>
-                <!--need to add idk what to make it display actual transactions that happened :( !-->
-                <tr>
-                    <td class="data">notes</td>
-                    <td class="data">notes</td>
-                    <td class="data">notes</td>
-                    <td class="data">notes</td>
-                    <td class="data">notes</td>
-                </tr>
+                <!--user-trans.js should autopopulate -->
             </table>
         </div>
     </body>
-    <script>
-        const API_BASE_URL = "https://stock-trading-system-production.up.railway.app/api/";  // Backend API URL
-
-        document.addEventListener("DOMContentLoaded", function() {
-            fetch(`${API_BASE_URL}transactions/`)  // Uses base URL dynamically
-                .then(response => response.json())
-                .then(data => {
-                    let transactionList = "";
-                    if (data.length === 0) {
-                        document.getElementById("no-transactions").style.display = "block"; // Show message if empty
-                    } else {
-                        data.forEach(transaction => {
-                            transactionList += `<tr>
-                                <td>${transaction.ticker}</td>
-                                <td>${transaction.transaction_type}</td>
-                                <td>${transaction.quantity}</td>
-                                <td>$${transaction.price_at_transaction.toFixed(2)}</td>
-                                <td>${new Date(transaction.date).toLocaleDateString()}</td>
-                            </tr>`;
-                        });
-                        document.getElementById("transaction-list").innerHTML = transactionList;
-                    }
-                })
-                .catch(error => console.error("Error fetching transactions:", error));
-        });
-    </script>
 </html>

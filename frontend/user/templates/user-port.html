@@ -3,18 +3,19 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>KVB Stocks - My Portfolio</title>
-        <link rel="stylesheet" href="/static/user-port-layout.css">
-        <link rel="stylesheet" href="/static/user-port-styles.css">
-        <link rel="stylesheet" href="/static/nav-bar.css">
+        <link rel="stylesheet" href="../static/user-port-layout.css">
+        <link rel="stylesheet" href="../static/user-port-styles.css">
+        <link rel="stylesheet" href="../static/nav-bar.css">
+        <link type="text/javascript" src="../static/user-port.js">
     </head>
     <header>
         <table class="logo">
-            <td><a class="logo" href="/user-dash.html">KVB Stocks</a></td>
+            <td><a class="logo" href="./user-dash.html">KVB Stocks</a></td>
         </table>
         <table class="nav">
-            <td><a href="/user-trans.html">Transactions</a></td>
-            <td><a href="/user-port.html">Portfolio</a></td>
-            <td><a href="/user-login.html">Log Out</a></td>
+            <td><a href="./user-trans.html">Transactions</a></td>
+            <td><a href="./user-port.html">Portfolio</a></td>
+            <td><a href="./user-login.html">Log Out</a></td>
         </table>
         <table class="line">
             <tr></tr>
@@ -36,11 +37,11 @@
             <table class="total">
                 <tr>
                     <td class="item">Stocks</td>
-                    <td class="data">notes</td><!--insert function that shows total stocks-->
+                    <!--user-port.js will populate the rest of the table-->
                 </tr>
                 <tr>
                     <td class="item">Cash</td>
-                    <td class="data">notes</td><!--insert function that shows cash-->
+                    <!--user-port.js will populate the rest of the table-->
                 </tr>
             </table>
             <div class="header2">
@@ -57,41 +58,8 @@
                     <td class="item">Return</td>
                     <td class="item">Equity</td>
                 </tr>
-				<!--need to add something that actually displays the portfolio schtuff!-->
-                <tr>
-                    <td class="data">notes</td>
-                    <td class="data">notes</td>
-                    <td class="data">notes</td>
-                    <td class="data">notes</td>
-                    <td class="data">notes</td>
-                    <td class="data">notes</td>
+				<!--user-port.js will populate the rest of the table-->
             </table>
         </div>
     </body>
-    <script>
-        const API_BASE_URL = "https://stock-trading-system-production.up.railway.app/api/";  // Backend API URL
-
-        document.addEventListener("DOMContentLoaded", function() {
-            fetch(`${API_BASE_URL}portfolio/`)  // Uses base URL dynamically
-                .then(response => response.json())
-                .then(data => {
-                    let portfolioList = "";
-                    if (data.length === 0) {
-                        document.getElementById("no-stocks").style.display = "block"; // Show message if empty
-                    } else {
-                        data.forEach(stock => {
-                            let totalValue = stock.quantity * stock.current_price;
-                            portfolioList += `<tr>
-                                <td>${stock.ticker}</td>
-                                <td>${stock.quantity}</td>
-                                <td>$${stock.current_price.toFixed(2)}</td>
-                                <td>$${totalValue.toFixed(2)}</td>
-                            </tr>`;
-                        });
-                        document.getElementById("portfolio-list").innerHTML = portfolioList;
-                    }
-                })
-                .catch(error => console.error("Error fetching portfolio:", error));
-        });
-    </script>
 </html>

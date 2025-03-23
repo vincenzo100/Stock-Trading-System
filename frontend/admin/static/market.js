@@ -35,3 +35,10 @@ function updateMarketHours() {
     .then(data => alert("Market hours updated successfully!"))
     .catch(error => console.error("Error updating market hours:", error));
 }
+
+//KEA 03/23/2025 - Added below to show that a button is selected
+
+function toggleMarketDay(day) {
+    const weekday = document.getElementById(`button${day}`);
+    weekday.classList.toggle("selected");
+}
