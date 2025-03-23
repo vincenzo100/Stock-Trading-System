@@ -4,34 +4,40 @@
         <title>KVB Stocks - Admin Login Page</title>
         <link rel="stylesheet" href="admin-login-layout.css">
         <link rel="stylesheet" href="admin-login-styles.css">
-        <link rel="stylesheet" href="/user/nav-bar.css"> <!-- Fixed incorrect path -->
+        <link rel="stylesheet" href="/User Webpages/nav-bar.css">
     </head>
     <header>
         <table class="logo">
-            <td>KVB Stocks</td>
+            <td>
+                KVB Stocks
+            <td>
         </table>
     </header>
     <body>
         <div class="description">
-            <p>Log into your KVB Admin Portal</p>
+            <p>
+                Log into your KVB Admin Portal
+            </p>
         </div>
         <div class="credentials">
             <form>
                 <div class="epass">
                     <label for="email">email*</label><br>
                 </div>
-                <input type="text" id="email" name="email"><br>
+                    <input type="email" id="email" name="email" required><br>
                 <div class="epass">
                     <label for="password">password*</label><br>
                 </div>    
-                <input type="text" id="password" name="password"><br>
+                    <input type="password" id="password" name="password" required><br>
                 <div class="submit">
-                    <input type="submit" value="login">
+                    <input type="submit" value="login" formaction="admin-dash.html">
                 </div>    
-            </form>
+                </form>
         </div>
         <div class="bottom">
-            <p>Are you a customer? <a href="/user-login.html">Login here</a></p> <!-- Fixed path -->
+            <p>
+                Are you a customer? <a href="/User Webpages/user-login.html">Login here</a>
+            </p>
         </div>
     </body>
 </html>
