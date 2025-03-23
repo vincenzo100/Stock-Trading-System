@@ -2,18 +2,23 @@
     <head>
         <meta charset="utf-8">
         <title>KVB Stocks - Create Account</title>
-        <link rel="stylesheet" href="/admin/create-acc-styles.css"> <!-- Fixed path -->
+        <link rel="stylesheet" href="create-acc-layout.css">
+        <link rel="stylesheet" href="create-acc-styles.css">
     </head>
     <header>
         <table class="logo">
-            <td>KVB Stocks</td>
+            <td>
+                KVB Stocks
+            <td>
         </table>
     </header>
     <body>
         <div class="container">
             <table class="lside">
                 <tr>
-                    <td class="head1">Account Setup</td>
+                    <td class="head1">
+                        Account Setup
+                    </td>
                 </tr>
                 <tr>
                     <td class="head12">
@@ -23,7 +28,9 @@
             </table>
             <div class="rside">
                 <div class="head2">
-                    <p>Please fill out your name as they appear on your government ID.</p>
+                    <p>
+                        Please fill out your name as they appear on your government ID.
+                    </p>
                 </div>
                 <div class="answers">
                     <form>
@@ -33,16 +40,20 @@
                         </div>
                         <div class="epc">
                             <input type="email" id="email" name="email" placeholder="email*" required>
+                            <!--password needs to be verified with javascript-->
                             <input type="password" id="pass" name="pass" placeholder="password*" required>
                             <input type="password" id="cpass" name="cpass" placeholder="confirm password*" required>
                         </div>
                         <div class="next">
-                            <input type="submit" value="next" formaction="/user-exp.html"> <!-- Fixed path -->
+                            <input type="submit" value="next" formaction="user-exp.html">
                         </div>
                     </form>
                 </div>
                 <div class="bottom">
-                    <p>Already have an account? <a href="/user-login.html">Login Here</a></p> <!-- Fixed path -->
+                    <p>
+                        Already have an account?
+                        <a href="user-login.html">Login Here</a>
+                    </p>
                 </div>
             </div>
         </div>
