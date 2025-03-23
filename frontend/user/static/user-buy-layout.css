@@ -62,3 +62,7 @@ button, input[type=reset], input[type=submit] {
     justify-content: flex-end;
     gap: 5px;
 }
+
+input[type=text]#shares {
+    margin-bottom: 25px;
+}

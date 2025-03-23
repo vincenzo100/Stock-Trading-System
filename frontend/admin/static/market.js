@@ -35,3 +35,10 @@ function updateMarketHours() {
     .then(data => alert("Market hours updated successfully!"))
     .catch(error => console.error("Error updating market hours:", error));
 }
+
+function toggleMarketDay(day) {
+    const weekday = document.getElementById(`button${day}`);
+    
+    preventDefault();
+    weekday.classList.toggle("selected");
+}
