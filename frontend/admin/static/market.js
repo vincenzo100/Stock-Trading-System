@@ -1,6 +1,6 @@
 const API_BASE_URL = "https://stock-trading-system-production.up.railway.app/api/";  // Backend API URL
 
-document.addEventListener("DOMContentLoaded", function() {
+/* document.addEventListener("DOMContentLoaded", function() {
     fetch(`${API_BASE_URL}market-hours/`)  // Fetch market hours
         .then(response => response.json())
         .then(data => {
@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         })
         .catch(error => console.error("Error fetching market hours:", error));
-});
+}); */
 
 function updateMarketHours() {
     const startTimeInput = document.getElementById("startTime");
@@ -38,7 +38,5 @@ function updateMarketHours() {
 
 function toggleMarketDay(day) {
     const weekday = document.getElementById(`button${day}`);
-    
-    preventDefault();
     weekday.classList.toggle("selected");
 }

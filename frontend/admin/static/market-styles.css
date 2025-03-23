@@ -30,6 +30,13 @@
     font-weight: 700;
 }
 
+.selected {
+    background-color: #772e25 !important;
+    color: #edddd4 !important;
+    font-weight: bold;
+    border: 1px solid #edddd4;
+}
+
 /*buttons*/
 
 .extra button, .extra input[type=reset], .extra input[type=submit] {
