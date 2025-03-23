@@ -2,44 +2,56 @@
     <head>
         <meta charset="utf-8">
         <title>KVB Stocks - Create Account</title>
-        <link rel="stylesheet" href="/admin/user-emp-styles.css"> <!-- Fixed path -->
+        <link rel="stylesheet" href="user-exp-layout.css">
+        <link rel="stylesheet" href="user-exp-styles.css">
     </head>
     <header>
         <table class="logo">
-            <td>KVB Stocks</td>
+            <td>
+                KVB Stocks
+            <td>
         </table>
     </header>
     <body>
         <div class="container">
             <table class="lside">
                 <tr>
-                    <td class="head1">Questions About Investing</td>
+                    <td class="head1">
+                        Questions About Investing
+                    </td>
                 </tr>
                 <tr>
                     <td class="head12">
-                        We're legally required to collect this information. This does not affect your account creation.
+                        We're legally required to collect this information. This does not
+                        affect your account creation.
                     </td>
                 </tr>
             </table>
             <div class="rside">
                 <div class="head2">
-                    <p>What's your employment status?</p>
+                    <p>
+                        What's your employment status?
+                    </p>
                 </div>
                 <div class="answers">
                     <form>
                         <div class="options">
-                            <input type="radio" name="level" value="student">Student<br>
-                            <input type="radio" name="level" value="unemployed">Unemployed<br>
-                            <input type="radio" name="level" value="employed">Employed<br>
-                            <input type="radio" name="level" value="retired">Retired<br>
+                            <input type="radio" name="status" value="student" required>student<br>
+                            <input type="radio" name="status" value="unemployed">unemployed<br>
+                            <input type="radio" name="status" value="employed">employed<br>
+                            <input type="radio" name="status" value="retired">retired<br>
                         </div>
                         <div class="next">
-                            <input type="submit" value="next" formaction="/user-acc.html"> <!-- Fixed path -->
+                            <!--change the form action to the next page-->
+                            <input type="submit" value="next" formaction="user-acc.html">
                         </div>
                     </form>
                 </div>
                 <div class="bottom">
-                    <p>Already have an account? <a href="/user-login.html">Login Here</a></p> <!-- Fixed path -->
+                    <p>
+                        Already have an account?
+                        <a href="user-login.html">Login Here</a>
+                    </p>
                 </div>
             </div>
         </div>
