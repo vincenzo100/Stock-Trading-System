@@ -3,13 +3,13 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>KVB Stocks - Market Schedule</title>
-        <link rel="stylesheet" href="sched-layout.css">
-        <link rel="stylesheet" href="sched-styles.css">
-        <link rel="stylesheet" href="/user/nav-bar.css"> <!-- Fixed incorrect path -->
+        <link rel="stylesheet" href="/static/sched-layout.css">
+        <link rel="stylesheet" href="/static/sched-styles.css">
+        <link rel="stylesheet" href="/user/static/nav-bar.css"> <!-- Fixed incorrect path -->
     </head>
     <header>
         <table class="logo">
-            <td><a class="logo" href="/user-dash.html">KVB Admin</a></td> <!-- Fixed path -->
+            <td><a class="logo" href="/admin-dash.html">KVB Admin</a></td> <!-- Fixed path -->
         </table>
         <table class="nav">
             <td><a href="/admin-login.html">Log Out</a></td> <!-- Fixed path -->
@@ -28,24 +28,75 @@
                 </td>
             </tr>
         </table>
-        <div class="bod">
-            <table class="header">
-                <tr>
-                    <td class="item">Date</td>
-                    <td class="item">Holiday</td>
-                    <td class="item">Enable</td>
-                </tr>
-                <tr>
-                    <td class="data">notes</td><!--insert function that shows date-->
-                    <td class="data">notes</td><!--insert function that shows id-->
-                    <td class="data">notes</td><!--insert function that shows type-->
-                </tr>
-                <tr>
-                    <td class="data">notes</td><!--insert function that shows date-->
-                    <td class="data">notes</td><!--insert function that shows id-->
-                    <td class="data">notes</td><!--insert function that shows type-->
-                </tr>
-            </table>
-        </div>
+        <form>
+            <div class="bod">
+                <table class="header">
+                    <tr>
+                        <td class="item">Date</td>
+                        <td class="item">Holiday
+                        <span>Enable</span></td>
+                    </tr>
+                    <tr>
+                        <td class="data">Jan. 01, 2025</td>
+                        <td class="data">New Year's Day
+                        <input type="checkbox" id="check" name="nyd" checked="checked"></td>
+                    </tr>
+                    <tr>
+                        <td class="data">Jan. 20, 2025</td>
+                        <td class="data">Martin Luther King Jr. Day
+                        <input type="checkbox" id="check" name="nyd" checked="checked"></td>
+                    </tr>
+                    <tr>
+                        <td class="data">Feb. 17, 2025</td>
+                        <td class="data">President's Day
+                        <input type="checkbox" id="check" name="nyd"  checked="checked"></td>
+                    </tr>
+                    <tr>
+                        <td class="data">Mar. 31, 2025</td>
+                        <td class="data">Caesar Chavez Day
+                        <input type="checkbox" id="check" name="nyd" checked="checked"></td>
+                    </tr>
+                    <tr>
+                        <td class="data">May 26, 2025</td>
+                        <td class="data">Memorial Day
+                        <input type="checkbox" id="check" name="nyd" checked="checked"></td>
+                    </tr>
+                    <tr>
+                        <td class="data">Jun. 19, 2025</td>
+                        <td class="data">Juneteenth
+                        <input type="checkbox" id="check" name="nyd" checked="checked"></td>
+                    </tr>
+                    <tr>
+                        <td class="data">Jul. 4, 2025</td>
+                        <td class="data">Independence Day
+                        <input type="checkbox" id="check" name="nyd" checked="checked"></td>
+                    </tr>
+                    <tr>
+                        <td class="data">Sep. 1, 2025</td>
+                        <td class="data">Labor Day
+                        <input type="checkbox" id="check" name="nyd" checked="checked"></td>
+                    </tr>
+                    <tr>
+                        <td class="data">Nov. 11, 2025</td>
+                        <td class="data">Veteran's Day
+                        <input type="checkbox" id="check" name="nyd" checked="checked"></td>
+                    </tr>
+                    <tr>
+                        <td class="data">Nov. 27, 2025</td>
+                        <td class="data">Thanksgiving Day
+                        <input type="checkbox" id="check" name="nyd" checked="checked"></td>
+                    </tr>
+                    <tr>
+                        <td class="data">Dec. 25, 2025</td>
+                        <td class="data">Christmas Day
+                        <input type="checkbox" id="check" name="nyd" checked="checked"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="extra">
+                <button formaction="/adash">cancel</button>
+                <button type="submit" formaction="/csched">submit</button>
+            </div>
+        </form>
     </body>
 </html>
