@@ -1,5 +1,10 @@
 @charset "utf-8";
 
+@font-face {
+    font-family: 'bahnschrift';
+    src: url(bahnschrift.ttf);
+}
+
 .container a:hover {
     color: #772e25;
 }
