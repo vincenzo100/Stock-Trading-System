@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="../static/user-stocks-layout.css">
         <link rel="stylesheet" href="../static/user-stocks-styles.css">
         <link rel="stylesheet" href="../static/nav-bar.css">
+        <link type="text/javascript" src="../static/user-stock.js">
     </head>
     <header>
         <table class="logo">
@@ -40,40 +41,8 @@
                     <td class="item">Volume</td>
                     <td class="item">Market Cap</td>
                 </tr>
-				<!--need to actuall add something that displays what its supposed to :') !-->
-                <tr>
-                    <td class="data">notes</td>
-                    <td class="data">notes</td>
-                    <td class="data">notes</td>
-                    <td class="data">notes</td>
-                    <td class="data">notes</td>
-                </tr>
+				<!--user-stock.js should autopopulate the rest of the table -->
             </table>
         </div>
     </body>
-    <script>
-        const API_BASE_URL = "https://stock-trading-system-production.up.railway.app/api/";  // Backend API URL
-
-        document.addEventListener("DOMContentLoaded", function() {
-            fetch(`${API_BASE_URL}stocks/`)  // Uses base URL dynamically
-                .then(response => response.json())
-                .then(data => {
-                    let stocksList = "";
-                    if (data.length === 0) {
-                        document.getElementById("no-stocks").style.display = "block"; // Show message if empty
-                    } else {
-                        data.forEach(stock => {
-                            stocksList += `<tr>
-                                <td>${stock.company_name}</td>
-                                <td>${stock.ticker}</td>
-                                <td>$${stock.price.toFixed(2)}</td>
-                                <td>${stock.volume}</td>
-                            </tr>`;
-                        });
-                        document.getElementById("stocks-list").innerHTML = stocksList;
-                    }
-                })
-                .catch(error => console.error("Error fetching stocks:", error));
-        });
-    </script>
 </html>
