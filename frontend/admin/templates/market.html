@@ -3,18 +3,18 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>KVB Admin - Market Hours</title>
-        <link rel="stylesheet" href="/static/market-layout.css">
-        <link rel="stylesheet" href="/static/market-styles.css">
-        <link rel="stylesheet" href="/user/static/nav-bar.css">
-        <script type="text/javascript" src="/static/market.js" defer></script>
-        <script type="text/javascript" src="/static/kea-market.js" defer></script>
+        <link rel="stylesheet" href="../static/market-layout.css">
+        <link rel="stylesheet" href="../static/market-styles.css">
+        <link rel="stylesheet" href="../user/static/nav-bar.css">
+        <script type="text/javascript" src="../static/market.js" defer></script>
+        <script type="text/javascript" src="../static/kea-market.js" defer></script>
     </head>
     <header>
         <table class="logo">
-            <td><a class="logo" href="/admin-dash.html">KVB Admin</a></td>
+            <td><a class="logo" href="./admin-dash.html">KVB Admin</a></td>
         </table>
         <table class="nav">
-            <td><a href="/admin-login.html">Log Out</a></td>
+            <td><a href="./admin-login.html">Log Out</a></td>
         </table>
         <table class="line">
             <tr></tr>
@@ -50,21 +50,21 @@
                 <tr>
                     <td>
                         <div class="start">
-                            <input type="time" id="time" min="00:00" max="23:59" value="09:00" required />
+                            <input type="time" id="startTime" min="00:00" max="23:59" value="09:00" required />
                         </div>
                     </td>
                     <td>to</td>
                     <td>
                         <div class="end">
-                            <input type="time" id="time" min="00:00" max="23:59" value="17:00" required />
+                            <input type="time" id="endTime" min="00:00" max="23:59" value="17:00" required />
                         </div>
                     </td>
                 </tr>
             </table>
             <div class="extra">
-                <button formaction="admin-dash.html">cancel</button>
+                <button formaction="./admin-dash.html">cancel</button>
                 <!-- clear isn't working again smhhh look up how to refresh the page for it to work -->
-                <button type="submit" formaction="/conf-market.html" onclick="updateMarketHours()">submit</button>
+                <button type="submit" formaction="./conf-market.html" onclick="updateMarketHours()">submit</button>
             </div>
         </div>
     </form>
