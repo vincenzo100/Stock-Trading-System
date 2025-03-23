@@ -1,37 +1,53 @@
 <html>
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>KVB Stocks - Buy/Sell Stocks</title>
-        <link rel="stylesheet" href="/admin/user-buy-styles.css"> <!-- Fixed path -->
-        <script defer src="/admin/user-buy.js"></script> <!-- Fixed path -->
+        <link rel="stylesheet" href="user-dep-layout.css">
+        <link rel="stylesheet" href="user-dep-styles.css">
+        <link rel="stylesheet" href="nav-bar.css">
     </head>
     <header>
         <table class="logo">
-            <td><a class="logo" href="/user-dash.html">KVB Stocks</a></td> <!-- Fixed path -->
+            <td><a class="logo" href="user-dash.html">KVB Stocks</a></td>
         </table>
         <table class="nav">
-            <td><a href="/user-trans.html">Transactions</a></td> <!-- Fixed path -->
-            <td><a href="/user-login.html">Log Out</a></td> <!-- Fixed path -->
+            <td><a href="user-trans.html">Transactions</a></td>
+            <td><a href="user-port.html">Portfolio</a></td>
+            <td><a href="user-login.html">Log Out</a></td>
+        </table>
+        <table class="line">
+            <tr></tr>
         </table>
     </header>
+    <!--always copy above text for nav bar-->
     <body>
-        <div class="container">
-            <h2>Buy or Sell Stocks</h2>
-            <form id="tradeForm">
-                <label for="ticker">Stock Ticker</label><br>
-                <input type="text" id="ticker" name="ticker" required><br>
-
-                <label for="action">Action</label><br>
-                <select id="action" name="action">
-                    <option value="buy">Buy</option>
-                    <option value="sell">Sell</option>
-                </select><br>
-
-                <label for="shares">Number of Shares</label><br>
-                <input type="number" id="shares" name="shares" required><br>
-
-                <button type="submit">Submit</button>
-            </form>
+        <table class="title">
+            <tr>
+                <td>Buy/Sell Stocks</td>
+            </tr>
+        </table>
+    <!--always copy above for page title-->
+        <div class="bod">
+            <div class="right">
+                <form>
+                    <label for="ticker">Ticker</label><br>
+                    <input type="text" id="ticker" name="ticker"><br>
+                    <label for="action">Action</label><br>
+                    <select id="action" name="action">
+                        <option value="none">Select</option>
+                        <option value="buy">Buy</option>
+                        <option value="sell">Sell</option>
+                    </select><br>
+                    <label for="shares">Number of Shares</label><br>
+                    <input type="text" id="shares" name="shares">
+                    <div class="extra">
+                        <button formaction="user-dash.html">cancel</button>
+                        <input type="reset" value="clear">
+                        <button type="submit" formaction="user-tconf.html">submit</button>
+                    </div>
+                </form>
+            </div>     
         </div>
     </body>
     <script>
