@@ -1,43 +1,45 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>KVB Stocks - Admin Login Page</title>
-        <link rel="stylesheet" href="admin-login-layout.css">
-        <link rel="stylesheet" href="admin-login-styles.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>KVB Stocks - Stock Creation</title>
+        <link rel="stylesheet" href="admin-stock-layout.css">
+        <link rel="stylesheet" href="admin-stock-styles.css">
         <link rel="stylesheet" href="/User Webpages/nav-bar.css">
     </head>
     <header>
         <table class="logo">
-            <td>
-                KVB Stocks
-            <td>
+            <td><a class="logo" href="admin-dash.html">KVB Admin</a></td>
+        </table>
+        <table class="nav">
+            <td><a href="admin-login.html">Log Out</a></td>
         </table>
     </header>
+    <!--always copy above text for nav bar-->
     <body>
-        <div class="description">
-            <p>
-                Log into your KVB Admin Portal
-            </p>
-        </div>
-        <div class="credentials">
-            <form>
-                <div class="epass">
-                    <label for="email">email*</label><br>
-                </div>
-                    <input type="email" id="email" name="email" required><br>
-                <div class="epass">
-                    <label for="password">password*</label><br>
-                </div>    
-                    <input type="password" id="password" name="password" required><br>
-                <div class="submit">
-                    <input type="submit" value="login" formaction="admin-dash.html">
-                </div>    
+        <table class="title">
+            <tr>
+                <td>Create a Stock</td>
+            </tr>
+        </table>
+    <!--always copy above for page title-->
+        <div class="bod">
+            <div class="right">
+                <form>
+                    <label for="company">Company Name*</label><br>
+                    <input type="text" id="company" name="company" required><br>
+                    <label for="ticket">Stock Ticker*</label><br>
+                    <input type="text" id="ticker" name="ticker" required><br>
+                    <label for="initial">Initial Price*</label><br>
+                    <input type="text" id="initial" name="initial" required>
+                    <div class="extra">
+                        <!--fix cancel button because it won't work with required-->
+                        <button formaction="admin-dash.html">cancel</button>
+                        <input type="reset" value="clear">
+                        <button type="submit" formaction="admin-conf.html">submit</button>
+                    </div>
                 </form>
-        </div>
-        <div class="bottom">
-            <p>
-                Are you a customer? <a href="/User Webpages/user-login.html">Login here</a>
-            </p>
+            </div>     
         </div>
     </body>
 
