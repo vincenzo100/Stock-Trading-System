@@ -1,27 +1,48 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>KVB Stocks - Transactions</title>
-        <link rel="stylesheet" href="/admin/user-trans-styles.css"> <!-- Fixed path -->
-        <script defer src="/admin/user-trans.js"></script> <!-- Fixed path -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>KVB Stocks - Transaction History</title>
+        <link rel="stylesheet" href="user-trans-layout.css">
+        <link rel="stylesheet" href="user-trans-styles.css">
+        <link rel="stylesheet" href="nav-bar.css">
     </head>
     <header>
         <table class="logo">
-            <td><a class="logo" href="/user-dash.html">KVB Stocks</a></td> <!-- Fixed path -->
+            <td><a class="logo" href="user-dash.html">KVB Stocks</a></td>
         </table>
         <table class="nav">
-            <td><a href="/user-port.html">Portfolio</a></td> <!-- Fixed path -->
-            <td><a href="/user-login.html">Log Out</a></td> <!-- Fixed path -->
+            <td><a href="user-trans.html">Transactions</a></td>
+            <td><a href="user-port.html">Portfolio</a></td>
+            <td><a href="user-login.html">Log Out</a></td>
+        </table>
+        <table class="line">
+            <tr></tr>
         </table>
     </header>
+    <!--always copy above text for nav bar-->
     <body>
-        <div class="container">
-            <h2>Transaction History</h2>
-            <table>
-                <tr><th>Stock</th><th>Action</th><th>Quantity</th><th>Price</th><th>Date</th></tr>
-                <tbody id="transaction-list"></tbody> <!-- Will be populated by JavaScript -->
+        <table class="title">
+            <td>Transaction History</td>
+        </table>
+        <div class="bod">
+            <table class="header">
+                <tr>
+                    <td class="item">Date</td>
+                    <td class="item">ID</td>
+                    <td class="item">Type</td>
+                    <td class="item">Description</td>
+                    <td class="item">Amount</td>
+                </tr>
+                <!--need to add idk what to make it display actual transactions that happened :( !-->
+                <tr>
+                    <td class="data">notes</td>
+                    <td class="data">notes</td>
+                    <td class="data">notes</td>
+                    <td class="data">notes</td>
+                    <td class="data">notes</td>
+                </tr>
             </table>
-            <p id="no-transactions" style="display:none;">No transactions found.</p> <!-- Message if no transactions -->
         </div>
     </body>
     <script>
